@@ -12,6 +12,7 @@ Class Usuario{
     private $tipo;
     private $clave;
     private $fecha;
+    private $estado;
     
     private $condicion;
 
@@ -49,6 +50,10 @@ Class Usuario{
 
     function getFecha() {
         return $this->fecha;
+    }
+
+    function getEstado() {
+        return $this->estado;
     }
 
     function getCondicion() {
@@ -91,10 +96,15 @@ Class Usuario{
         $this->fecha = $fecha;
     }
 
+    function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
     function setCondicion($condicion) {
         $this->condicion = $condicion;
     }
 
+    
         
     // metodos
     function recuperarUsuario(Usuario $usuario) {

@@ -11,11 +11,6 @@ class Historial {
     private $asignacion;
     private $fecha;
     private $estado;
-    
-    private $condicion;
-    private $offset;
-    private $per_page;
-    private $con;
 
     function getEncuesta() {
         return $this->encuesta;
@@ -118,25 +113,19 @@ class Historial {
     
     function recuperarEncuestaHistorial(Historial $historial) {
 
-        $id_usuario = $historial->getId_usuario();
+        $id_usuario = $historial->getUsuario();
         $condicion  = $historial->getCondicion();
-        $offset     = $historial->getOffset();
-        $per_page   = $historial->getPer_page();
-        $con        = $historial->getCon(); 
+        $con        = Conexion::conectar();
                 
-        $sSelect = " SELECT DISTINCT historial.id_encuesta,nombre_encuesta,tipoencuesta.nombre_tipoencuesta ";
-        $sTable = " FROM historial,tipoencuesta ";
-        $sWhere = " WHERE historial.tipo_encuesta=tipoencuesta.id_tipoencuesta ";
+        $sSelect = " SELECT DISTINCT historial.id_encuesta,nombre_encuesta,tipo_encuesta.nombre_tipo_encuesta ";
+        $sTable = " FROM historial,tipo_encuesta ";
+        $sWhere = " WHERE historial.tipo_encuesta=tipo_encuesta.id_tipo_encuesta ";
 
         if ($id_usuario != "") {
             $sWhere .= " AND historial.id_usuario='$id_usuario' ";
         }
         if ($condicion != "") {
             $sWhere .= $condicion;
-        }
-
-        if (($offset != "") && ($per_page != "")) {
-            $sWhere .= " LIMIT $offset,$per_page ";
         }
 
         $sql = " $sSelect  $sTable $sWhere ";
@@ -149,9 +138,7 @@ class Historial {
         
        $id_encuesta = $historial->getId_encuesta();
        $condicion   = $historial->getCondicion();
-       $offset      = $historial->getOffset();
-       $per_page    = $historial->getPer_page();
-       $con         = $historial->getCon(); 
+       $con         = Conexion::conectar();
 
        $sSelect = " SELECT historial.id_asignacion, usuario.nombre_usuario,usuario.apellido_usuario,historial.id_evaluado, historial.id_usuario, historial.fecha_agregado, tipo.nombre_tipo ";
        $sTable  = " FROM historial,usuario,tipo ";
@@ -169,10 +156,6 @@ class Historial {
           $sWhere.= " AND historial.id_encuesta='$id_encuesta' ";
         }
         $sWhere.=" ORDER BY historial.id_asignacion,historial.fecha_agregado desc ";
-        
-         if (($offset!="")&&($per_page!="")){
-           $sWhere .= " LIMIT $offset,$per_page ";
-        }
 
         $sql = " $sSelect  $sTable $sWhere ";
 
@@ -188,7 +171,7 @@ class Historial {
       $id_evaluado     = $historial->getId_evaluado();
       $nombre_encuesta = $historial->getNombre_encuesta();
       $tipo_encuesta   = $historial->getTipo_encuesta();
-      $con             = $historial->getCon();     
+      $con             = Conexion::conectar();    
           
       $fecha_agregado=date("Y-m-d H:i:s");
         
@@ -202,7 +185,7 @@ class Historial {
     
         $id_encuesta    = $encuesta    ->getId(); 
         $id_evaluado    = $calificacion->getId_evaluado(); 
-        $con            = $calificacion->getCon(); 
+        $con            = Conexion::conectar();
         
        $sSelect = " SELECT avg(calificacion_nota),nombre_pregunta ";
              $sTable  = " FROM historial,pregunta,calificacion ";
@@ -225,7 +208,7 @@ class Historial {
         $id_usuario  = $historial->getId_usuario();
         $id_evaluado = $historial->getId_evaluado();
         $fecha       = $historial->getFecha_agregado();
-        $con         = $historial->getCon();
+        $con         = Conexion::conectar();
                  
         $sSelect = " SELECT calificacion_nota,comentario_calificacion,nombre_pregunta,descripcion_pregunta,historial.id_usuario,historial.id_evaluado,historial.fecha_agregado ";
              $sTable  = " FROM historial,pregunta,calificacion ";
@@ -251,7 +234,7 @@ class Historial {
         $id_usuario   = $historial->getId_usuario();
         $id_evaluado  = $historial->getId_evaluado();
         $fecha        = $historial->getFecha_agregado();
-        $con          = $historial->getCon();
+        $con          = Conexion::conectar();
                 
           $sSelect = " SELECT comentariofinal.comentario ";
             $sTable  = " FROM comentariofinal,historial ";
