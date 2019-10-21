@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2019 a las 01:35:17
+-- Tiempo de generación: 21-10-2019 a las 08:32:27
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -31,17 +31,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `calificacion` (
   `id_pregunta` int(11) NOT NULL,
   `comentario_calificacion` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
-  `calificacion_nota` int(11) NOT NULL,
+  `nota_calificacion` int(11) NOT NULL,
   `id_usuario` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `id_evaluado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `fecha_agregado` datetime NOT NULL
+  `fecha_calificacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `calificacion`
 --
 
-INSERT INTO `calificacion` (`id_pregunta`, `comentario_calificacion`, `calificacion_nota`, `id_usuario`, `id_evaluado`, `fecha_agregado`) VALUES
+INSERT INTO `calificacion` (`id_pregunta`, `comentario_calificacion`, `nota_calificacion`, `id_usuario`, `id_evaluado`, `fecha_calificacion`) VALUES
 (14, ' k', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
 (15, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
 (16, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
@@ -54,22 +54,22 @@ INSERT INTO `calificacion` (`id_pregunta`, `comentario_calificacion`, `calificac
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentariofinal`
+-- Estructura de tabla para la tabla `comentario_general`
 --
 
-CREATE TABLE `comentariofinal` (
+CREATE TABLE `comentario_general` (
   `id_encuesta` int(11) NOT NULL,
-  `comentario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion_comentario_general` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `id_usuario` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `id_evaluado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `fecha_agregado` datetime NOT NULL
+  `fecha_comentario_general` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `comentariofinal`
+-- Volcado de datos para la tabla `comentario_general`
 --
 
-INSERT INTO `comentariofinal` (`id_encuesta`, `comentario`, `id_usuario`, `id_evaluado`, `fecha_agregado`) VALUES
+INSERT INTO `comentario_general` (`id_encuesta`, `descripcion_comentario_general`, `id_usuario`, `id_evaluado`, `fecha_comentario_general`) VALUES
 (5, 'lll', '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:34'),
 (5, 'jojo', '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31');
 
@@ -83,14 +83,14 @@ CREATE TABLE `departamento` (
   `id_departamento` int(11) NOT NULL,
   `nombre_departamento` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `descripcion_departamento` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
-  `fecha_agregado` datetime NOT NULL
+  `fecha_departamento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `departamento`
 --
 
-INSERT INTO `departamento` (`id_departamento`, `nombre_departamento`, `descripcion_departamento`, `fecha_agregado`) VALUES
+INSERT INTO `departamento` (`id_departamento`, `nombre_departamento`, `descripcion_departamento`, `fecha_departamento`) VALUES
 (1, 'General', 'Sin Area especifica', '0000-00-00 00:00:00'),
 (3, 'TI', 'Informatica', '2019-09-05 16:57:05'),
 (4, 'Owl Evaluation', 'Equipo de desarrollo', '2019-09-14 04:45:39');
@@ -105,35 +105,55 @@ CREATE TABLE `encuesta` (
   `id_encuesta` int(11) NOT NULL,
   `nombre_encuesta` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `tipo_encuesta` int(11) NOT NULL,
-  `fecha_agregado` datetime NOT NULL
+  `fecha_encuesta` datetime NOT NULL,
+  `estado_encuesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `encuesta`
 --
 
-INSERT INTO `encuesta` (`id_encuesta`, `nombre_encuesta`, `tipo_encuesta`, `fecha_agregado`) VALUES
-(2, 'DESEMPENO ESPECIFICO DEL CARGO (T.I)', 1, '2019-09-12 03:03:11'),
-(3, 'HABILIDADES Y COMPETENCIAS GENERALES (T.I)', 1, '2019-09-12 03:03:35'),
-(4, 'HABILIDADES Y COMPETENCIAS GENERALES (DIRECTOR T.I)', 2, '2019-09-12 03:27:53'),
-(5, 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, '2019-09-12 03:28:28');
+INSERT INTO `encuesta` (`id_encuesta`, `nombre_encuesta`, `tipo_encuesta`, `fecha_encuesta`, `estado_encuesta`) VALUES
+(2, 'DESEMPENO ESPECIFICO DEL CARGO (T.I)', 1, '2019-09-12 03:03:11', 1),
+(3, 'HABILIDADES Y COMPETENCIAS GENERALES (T.I)', 1, '2019-09-12 03:03:35', 1),
+(4, 'HABILIDADES Y COMPETENCIAS GENERALES (DIRECTOR T.I)', 2, '2019-09-12 03:27:53', 1),
+(5, 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, '2019-09-12 03:28:28', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estadoasignacion`
+-- Estructura de tabla para la tabla `estado`
 --
 
-CREATE TABLE `estadoasignacion` (
+CREATE TABLE `estado` (
   `id_estado` int(11) NOT NULL,
   `nombre_estado` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `estadoasignacion`
+-- Volcado de datos para la tabla `estado`
 --
 
-INSERT INTO `estadoasignacion` (`id_estado`, `nombre_estado`) VALUES
+INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
+(1, 'habilitado'),
+(2, 'deshabilitado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_asignacion`
+--
+
+CREATE TABLE `estado_asignacion` (
+  `id_estado_asignacion` int(11) NOT NULL,
+  `nombre_estado_asignacion` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `estado_asignacion`
+--
+
+INSERT INTO `estado_asignacion` (`id_estado_asignacion`, `nombre_estado_asignacion`) VALUES
 (1, 'Asignada'),
 (2, 'Contestada'),
 (3, 'No Contestada');
@@ -146,7 +166,7 @@ INSERT INTO `estadoasignacion` (`id_estado`, `nombre_estado`) VALUES
 
 CREATE TABLE `genero` (
   `id_genero` int(11) NOT NULL,
-  `nombre_genero` varchar(25) COLLATE utf8_spanish2_ci NOT NULL
+  `nombre_genero` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -170,15 +190,15 @@ CREATE TABLE `historial` (
   `nombre_encuesta` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `tipo_encuesta` int(11) NOT NULL,
   `id_asignacion` int(11) NOT NULL,
-  `fecha_agregado` datetime NOT NULL,
-  `estado` int(11) NOT NULL
+  `fecha_historial` datetime NOT NULL,
+  `estado_usuario_encuesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `historial`
 --
 
-INSERT INTO `historial` (`id_encuesta`, `id_usuario`, `id_evaluado`, `nombre_encuesta`, `tipo_encuesta`, `id_asignacion`, `fecha_agregado`, `estado`) VALUES
+INSERT INTO `historial` (`id_encuesta`, `id_usuario`, `id_evaluado`, `nombre_encuesta`, `tipo_encuesta`, `id_asignacion`, `fecha_historial`, `estado_usuario_encuesta`) VALUES
 (5, '00.000.000-0', '00.000.000-0', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 1, '2019-10-09 02:06:34', 2),
 (5, '00.000.000-0', '14.518.129-1', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 1, '2019-10-09 02:25:31', 2);
 
@@ -222,47 +242,46 @@ INSERT INTO `pregunta` (`id_pregunta`, `id_encuesta`, `nombre_pregunta`, `descri
 (20, 4, 'Capacidad de Trabajo en Equipo:', 'Considera la manera de manejar las\r\nrelaciones de apoyo con su equipo de\r\ntrabajo y con otras Ã¡reas de la instituciÃ³n.\r\n'),
 (21, 4, 'Conocimientos / PreparaciÃ³n para la labor: ', 'Considera el conocimiento para la\r\nejecuciÃ³n de su labor, complementada\r\ncon la experiencia y educaciÃ³n.\r\n'),
 (22, 4, 'AlineaciÃ³n con el Plan EstratÃ©gico y Principios Institucionales:', 'Demuestra estar comprometido con la\r\ninstitucionalidad.\r\n\r\n'),
-(23, 4, 'PrecisiÃ³n, claridad y atenciÃ³n a los detalles del trabajo: ', 'Considera la\r\nprecisiÃ³n, claridad, confiabilidad y\r\npresentaciÃ³n de los resultados\r\n\r\n'),
-(29, 17, 'c', 'c');
+(23, 4, 'PrecisiÃ³n, claridad y atenciÃ³n a los detalles del trabajo: ', 'Considera la\r\nprecisiÃ³n, claridad, confiabilidad y\r\npresentaciÃ³n de los resultados\r\n\r\n');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipo`
+-- Estructura de tabla para la tabla `tipo_encuesta`
 --
 
-CREATE TABLE `tipo` (
-  `id_tipo` int(11) NOT NULL,
-  `nombre_tipo` varchar(25) COLLATE utf8_spanish2_ci NOT NULL
+CREATE TABLE `tipo_encuesta` (
+  `id_tipo_encuesta` int(11) NOT NULL,
+  `nombre_tipo_encuesta` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `tipo`
+-- Volcado de datos para la tabla `tipo_encuesta`
 --
 
-INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`) VALUES
+INSERT INTO `tipo_encuesta` (`id_tipo_encuesta`, `nombre_tipo_encuesta`) VALUES
+(1, 'General'),
+(2, 'Jefatura');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+
+CREATE TABLE `tipo_usuario` (
+  `id_tipo_usuario` int(11) NOT NULL,
+  `nombre_tipo_usuario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nombre_tipo_usuario`) VALUES
 (3, 'Administrador'),
 (1, 'Colaborador'),
 (2, 'Jefe de Area');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipoencuesta`
---
-
-CREATE TABLE `tipoencuesta` (
-  `id_tipoencuesta` int(11) NOT NULL,
-  `nombre_tipoencuesta` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `tipoencuesta`
---
-
-INSERT INTO `tipoencuesta` (`id_tipoencuesta`, `nombre_tipoencuesta`) VALUES
-(1, 'General'),
-(2, 'Jefatura');
 
 -- --------------------------------------------------------
 
@@ -272,46 +291,47 @@ INSERT INTO `tipoencuesta` (`id_tipoencuesta`, `nombre_tipoencuesta`) VALUES
 
 CREATE TABLE `usuario` (
   `id_usuario` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `nombre_usuario` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
-  `apellido_usuario` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
+  `nombre_usuario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
+  `apellido_usuario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `clave_usuario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
-  `mail_usuario` varchar(64) COLLATE utf8_spanish2_ci NOT NULL,
-  `fecha_agregado` datetime NOT NULL,
+  `mail_usuario` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
+  `fecha_usuario` datetime NOT NULL,
   `tipo_usuario` int(11) NOT NULL,
   `genero_usuario` int(11) NOT NULL,
-  `departamento_usuario` int(11) NOT NULL
+  `departamento_usuario` int(11) NOT NULL,
+  `estado_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `clave_usuario`, `mail_usuario`, `fecha_agregado`, `tipo_usuario`, `genero_usuario`, `departamento_usuario`) VALUES
-('00.000.000-0', 'Administrador', 'Sistema', '$2y$10$uWtfj/SuQJqs.TSDmJmz8OtWPV5ukdJTJ5aiIILlNwj6Lz3c35z0S', 'admin@admin.com', '2019-09-04 20:00:18', 3, 2, 1),
-('14.518.129-1', 'Alvaro Guillermo', 'Valenzuela Garrido', '$2y$10$z4lqxhwmiS9ikVmNouomJ.DX/JPDf2zIpfvkKjpYPOMdrZypBNx8a', 'agarrido@ciisa.cl', '2019-09-12 04:32:03', 2, 2, 3),
-('17.002.792-2', 'Sony Michael', 'Oyarzun Lopez', '$2y$10$wzhrqu3g1z.4OZZfCx9b2evJSVw4nQe1DMJ0hqz5zGEEYJN9YAsSW', 'sony.oyarzun@gmail.com', '2019-09-12 04:33:01', 1, 2, 4),
-('18.154.878-9', 'Richard Eduardo', 'Perez Contreras', '$2y$10$rJEy2Dx7UQ7PU0CQaM9Bw.l23cKrdXUS2Dg1mQdty9oJLUua.8.gm', 'richard.perez.contreras@ciisa.cl', '2019-09-14 04:49:19', 1, 2, 4),
-('18.608.585-k', 'Francisco Alejandro', 'Prado Diaz', '$2y$10$gR3mLV4lCnYdyEdNly9FheXj5qh/LcSt9t2iMgNDLa8luELXQ.OgW', 'francisco.prado.diaz@ciisa.cl', '2019-09-14 04:55:30', 2, 2, 4);
+INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `clave_usuario`, `mail_usuario`, `fecha_usuario`, `tipo_usuario`, `genero_usuario`, `departamento_usuario`, `estado_usuario`) VALUES
+('00.000.000-0', 'Administrador', 'Sistema', '$2y$10$uWtfj/SuQJqs.TSDmJmz8OtWPV5ukdJTJ5aiIILlNwj6Lz3c35z0S', 'admin@admin.com', '2019-09-04 20:00:18', 3, 2, 1, 1),
+('14.518.129-1', 'Alvaro Guillermo', 'Valenzuela Garrido', '$2y$10$z4lqxhwmiS9ikVmNouomJ.DX/JPDf2zIpfvkKjpYPOMdrZypBNx8a', 'agarrido@ciisa.cl', '2019-09-12 04:32:03', 2, 2, 3, 1),
+('17.002.792-2', 'Sony Michael', 'Oyarzun Lopez', '$2y$10$wzhrqu3g1z.4OZZfCx9b2evJSVw4nQe1DMJ0hqz5zGEEYJN9YAsSW', 'sony.oyarzun@gmail.com', '2019-09-12 04:33:01', 1, 2, 4, 1),
+('18.154.878-9', 'Richard Eduardo', 'Perez Contreras', '$2y$10$rJEy2Dx7UQ7PU0CQaM9Bw.l23cKrdXUS2Dg1mQdty9oJLUua.8.gm', 'richard.perez.contreras@ciisa.cl', '2019-09-14 04:49:19', 1, 2, 4, 1),
+('18.608.585-k', 'Francisco Alejandro', 'Prado Diaz', '$2y$10$gR3mLV4lCnYdyEdNly9FheXj5qh/LcSt9t2iMgNDLa8luELXQ.OgW', 'francisco.prado.diaz@ciisa.cl', '2019-09-14 04:55:30', 2, 2, 4, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarioencuesta`
+-- Estructura de tabla para la tabla `usuario_encuesta`
 --
 
-CREATE TABLE `usuarioencuesta` (
-  `id_asignacion` int(11) NOT NULL,
+CREATE TABLE `usuario_encuesta` (
+  `id_usuario_encuesta` int(11) NOT NULL,
   `id_usuario` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `id_encuesta` int(11) NOT NULL,
-  `fecha_agregado` datetime NOT NULL,
-  `estado` int(11) NOT NULL
+  `fecha_usuario_encuesta` datetime NOT NULL,
+  `estado_usuario_encuesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `usuarioencuesta`
+-- Volcado de datos para la tabla `usuario_encuesta`
 --
 
-INSERT INTO `usuarioencuesta` (`id_asignacion`, `id_usuario`, `id_encuesta`, `fecha_agregado`, `estado`) VALUES
+INSERT INTO `usuario_encuesta` (`id_usuario_encuesta`, `id_usuario`, `id_encuesta`, `fecha_usuario_encuesta`, `estado_usuario_encuesta`) VALUES
 (1, '00.000.000-0', 5, '2019-10-09 02:06:15', 1);
 
 --
@@ -325,6 +345,12 @@ ALTER TABLE `calificacion`
   ADD KEY `id_pregunta` (`id_pregunta`);
 
 --
+-- Indices de la tabla `comentario_general`
+--
+ALTER TABLE `comentario_general`
+  ADD KEY `id_encuesta` (`id_encuesta`);
+
+--
 -- Indices de la tabla `departamento`
 --
 ALTER TABLE `departamento`
@@ -336,13 +362,20 @@ ALTER TABLE `departamento`
 --
 ALTER TABLE `encuesta`
   ADD PRIMARY KEY (`id_encuesta`),
-  ADD KEY `tipo_encuesta` (`tipo_encuesta`);
+  ADD KEY `tipo_encuesta` (`tipo_encuesta`),
+  ADD KEY `id_estado` (`estado_encuesta`);
 
 --
--- Indices de la tabla `estadoasignacion`
+-- Indices de la tabla `estado`
 --
-ALTER TABLE `estadoasignacion`
+ALTER TABLE `estado`
   ADD PRIMARY KEY (`id_estado`);
+
+--
+-- Indices de la tabla `estado_asignacion`
+--
+ALTER TABLE `estado_asignacion`
+  ADD PRIMARY KEY (`id_estado_asignacion`);
 
 --
 -- Indices de la tabla `genero`
@@ -359,17 +392,17 @@ ALTER TABLE `pregunta`
   ADD KEY `id_encuesta` (`id_encuesta`);
 
 --
--- Indices de la tabla `tipo`
+-- Indices de la tabla `tipo_encuesta`
 --
-ALTER TABLE `tipo`
-  ADD PRIMARY KEY (`id_tipo`),
-  ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
+ALTER TABLE `tipo_encuesta`
+  ADD PRIMARY KEY (`id_tipo_encuesta`);
 
 --
--- Indices de la tabla `tipoencuesta`
+-- Indices de la tabla `tipo_usuario`
 --
-ALTER TABLE `tipoencuesta`
-  ADD PRIMARY KEY (`id_tipoencuesta`);
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`id_tipo_usuario`),
+  ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo_usuario`);
 
 --
 -- Indices de la tabla `usuario`
@@ -379,15 +412,16 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `mail_usuario` (`mail_usuario`),
   ADD KEY `tipo_usuario` (`tipo_usuario`),
   ADD KEY `genero_usuario` (`genero_usuario`),
-  ADD KEY `departamento_usuario` (`departamento_usuario`);
+  ADD KEY `departamento_usuario` (`departamento_usuario`),
+  ADD KEY `id_estado` (`estado_usuario`);
 
 --
--- Indices de la tabla `usuarioencuesta`
+-- Indices de la tabla `usuario_encuesta`
 --
-ALTER TABLE `usuarioencuesta`
-  ADD PRIMARY KEY (`id_asignacion`),
+ALTER TABLE `usuario_encuesta`
+  ADD PRIMARY KEY (`id_usuario_encuesta`),
   ADD KEY `id_encuesta` (`id_encuesta`),
-  ADD KEY `estado` (`estado`),
+  ADD KEY `estado` (`estado_usuario_encuesta`),
   ADD KEY `id_encuesta_2` (`id_encuesta`),
   ADD KEY `id_usuario` (`id_usuario`);
 
@@ -408,10 +442,16 @@ ALTER TABLE `encuesta`
   MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT de la tabla `estadoasignacion`
+-- AUTO_INCREMENT de la tabla `estado`
 --
-ALTER TABLE `estadoasignacion`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `estado`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_asignacion`
+--
+ALTER TABLE `estado_asignacion`
+  MODIFY `id_estado_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -426,22 +466,22 @@ ALTER TABLE `pregunta`
   MODIFY `id_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT de la tabla `tipo`
+-- AUTO_INCREMENT de la tabla `tipo_encuesta`
 --
-ALTER TABLE `tipo`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `tipo_encuesta`
+  MODIFY `id_tipo_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tipoencuesta`
+-- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
-ALTER TABLE `tipoencuesta`
-  MODIFY `id_tipoencuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `tipo_usuario`
+  MODIFY `id_tipo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `usuarioencuesta`
+-- AUTO_INCREMENT de la tabla `usuario_encuesta`
 --
-ALTER TABLE `usuarioencuesta`
-  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `usuario_encuesta`
+  MODIFY `id_usuario_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -454,25 +494,40 @@ ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`);
 
 --
+-- Filtros para la tabla `comentario_general`
+--
+ALTER TABLE `comentario_general`
+  ADD CONSTRAINT `comentario_general_ibfk_1` FOREIGN KEY (`id_encuesta`) REFERENCES `encuesta` (`id_encuesta`);
+
+--
 -- Filtros para la tabla `encuesta`
 --
 ALTER TABLE `encuesta`
-  ADD CONSTRAINT `encuesta_ibfk_1` FOREIGN KEY (`tipo_encuesta`) REFERENCES `tipoencuesta` (`id_tipoencuesta`);
+  ADD CONSTRAINT `encuesta_ibfk_1` FOREIGN KEY (`tipo_encuesta`) REFERENCES `tipo_encuesta` (`id_tipo_encuesta`),
+  ADD CONSTRAINT `encuesta_ibfk_2` FOREIGN KEY (`estado_encuesta`) REFERENCES `estado` (`id_estado`);
+
+--
+-- Filtros para la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`id_encuesta`) REFERENCES `encuesta` (`id_encuesta`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`departamento_usuario`) REFERENCES `departamento` (`id_departamento`),
-  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo` (`id_tipo`),
-  ADD CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`genero_usuario`) REFERENCES `genero` (`id_genero`);
+  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`),
+  ADD CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`genero_usuario`) REFERENCES `genero` (`id_genero`),
+  ADD CONSTRAINT `usuario_ibfk_4` FOREIGN KEY (`estado_usuario`) REFERENCES `estado` (`id_estado`);
 
 --
--- Filtros para la tabla `usuarioencuesta`
+-- Filtros para la tabla `usuario_encuesta`
 --
-ALTER TABLE `usuarioencuesta`
-  ADD CONSTRAINT `usuarioencuesta_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  ADD CONSTRAINT `usuarioencuesta_ibfk_3` FOREIGN KEY (`estado`) REFERENCES `estadoasignacion` (`id_estado`);
+ALTER TABLE `usuario_encuesta`
+  ADD CONSTRAINT `usuario_encuesta_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  ADD CONSTRAINT `usuario_encuesta_ibfk_3` FOREIGN KEY (`estado_usuario_encuesta`) REFERENCES `estado_asignacion` (`id_estado_asignacion`),
+  ADD CONSTRAINT `usuario_encuesta_ibfk_4` FOREIGN KEY (`id_encuesta`) REFERENCES `encuesta` (`id_encuesta`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
