@@ -9,10 +9,10 @@
 			!empty($_POST['mod_id']) &&
 			!empty($_POST['mod_nombre'])
 		){
-		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
                 include '../Clases/Pregunta.php';
+                $con = Conexion::conectar();
                 
 		$id_pregunta=intval($_POST['mod_id']);
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["mod_nombre"],ENT_QUOTES)));
@@ -23,14 +23,13 @@
                 $pregunta->setId($id_pregunta);
                 $pregunta->setNombre($nombre);
                 $pregunta->setDescripcion($descripcion);
-                $pregunta->setCon($con);
                 
 		$query_update = Pregunta::editarPregunta($pregunta);
                 
 			if ($query_update){
 				$messages[] = "Pregunta ha sido actualizada satisfactoriamente.";
 			} else{
-				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
+				$errors []= "Lo siento algo ha salido mal intenta nuevamente.";
 			}
 		} else {
 			$errors []= "Error desconocido.";

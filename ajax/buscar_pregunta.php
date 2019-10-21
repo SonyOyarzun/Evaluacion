@@ -11,8 +11,7 @@ if (isset($_GET['id'])) {
     
     $pregunta = new Pregunta();
     $pregunta->setId($id_pregunta);
-    $pregunta->setCon($con);
-    
+
     $query = Pregunta::recuperarPregunta($pregunta);
     
     $count = mysqli_num_rows($query);
@@ -70,9 +69,7 @@ if ($action == 'ajax') {
     $result = Pregunta::recuperarPregunta($pregunta);
 
     $numrows = mysqli_num_rows($result);
-    $total_pages = ceil($numrows / $per_page);
-    $reload = './pregunta.php';
-    //main query to fetch the data
+
     $query = $result;
     //loop through fetched data
     if ($numrows > 0) {
@@ -108,12 +105,6 @@ if ($action == 'ajax') {
             <?php
         }
         ?>
-                <tr>
-                    <td colspan=4><span class="pull-right">
-        <?php
-        echo paginate($reload, $page, $total_pages, $adjacents);
-        ?></span></td>
-                </tr>
             </table>
         </div>
                 <?php

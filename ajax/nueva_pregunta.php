@@ -4,10 +4,10 @@
 	if (empty($_POST['nombre'])) {
            $errors[] = "Nombre vacío";
         } else if (!empty($_POST['nombre'])){
-		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+            
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
                 include '../Clases/Pregunta.php';
+                $con = Conexion::conectar();
 		
                 $id_encuesta= intval($_POST["encuesta"]);
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
@@ -15,10 +15,9 @@
                
 		
                 $pregunta = new Pregunta();
-                $pregunta->setId_encuesta($id_encuesta);
+                $pregunta->setEncuesta($id_encuesta);
                 $pregunta->setNombre($nombre);
-                $pregunta->setDescripcion($descripcion);
-                $pregunta->setCon($con);        
+                $pregunta->setDescripcion($descripcion);      
                 
 		$query_new_insert = Pregunta::registrarPregunta($pregunta);
 			if ($query_new_insert){

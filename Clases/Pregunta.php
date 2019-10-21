@@ -66,9 +66,7 @@ Class Pregunta{
         $id_pregunta = $pregunta->getId();
         $id_encuesta = $pregunta->getEncuesta();
         $condicion   = $pregunta->getCondicion();
-        $offset      = $pregunta->getOffset();
-        $per_page    = $pregunta->getPer_page();
-        $con         = $pregunta->getCon();
+        $con         = Conexion::conectar();
                 
         $sTable = " encuesta , pregunta";
         $sWhere = " WHERE encuesta.id_encuesta=pregunta.id_encuesta ";
@@ -85,10 +83,6 @@ Class Pregunta{
         }
        
         $sWhere.=" ORDER BY id_pregunta";
-        
-         if (($offset!="")&&($per_page!="")){
-           $sWhere .= " LIMIT $offset,$per_page ";
-        }
 
         $sql = " SELECT * FROM  $sTable $sWhere ";
 
@@ -100,10 +94,10 @@ Class Pregunta{
 
       function registrarPregunta(Pregunta $pregunta){
           
-        $id_encuesta = $pregunta->getId_encuesta();
+        $id_encuesta = $pregunta->getEncuesta();
         $nombre      = $pregunta->getNombre();
         $descripcion = $pregunta->getDescripcion();
-        $con         = $pregunta->getCon();
+        $con         = Conexion::conectar();
           
 
       $sql=" INSERT INTO pregunta "
@@ -120,7 +114,7 @@ Class Pregunta{
         $id_pregunta = $pregunta->getId();
         $nombre      = $pregunta->getNombre();
         $descripcion = $pregunta->getDescripcion();
-        $con         = $pregunta->getCon();
+        $con         = Conexion::conectar();
          
         $sql=" UPDATE pregunta "
             ." SET nombre_pregunta='".$nombre."', descripcion_pregunta='".$descripcion."' "
@@ -134,7 +128,7 @@ Class Pregunta{
     function eliminarPregunta(Pregunta $pregunta){
         
         $id_pregunta = $pregunta->getId();
-        $con         = $pregunta->getCon();
+        $con         = Conexion::conectar();
         
         $sql=" DELETE FROM pregunta WHERE id_pregunta='".$id_pregunta."' ";
         $result=mysqli_query($con,$sql);

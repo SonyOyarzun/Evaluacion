@@ -41,7 +41,6 @@
 
 			<?php
 			include("./modal/registro_encuesta.php");
-			include("./modal/editar_encuesta.php");
 			?>
                     
 			<form class="form-horizontal" role="form" id="datos">
