@@ -83,7 +83,8 @@ Class Encuesta{
                  . " encuesta,tipo_encuesta ";
         
         $sWhere  = " WHERE "
-                 . " encuesta.tipo_encuesta = tipo_encuesta.id_tipo_encuesta ";
+                 . " encuesta.tipo_encuesta = tipo_encuesta.id_tipo_encuesta "
+                 . " AND encuesta.estado_encuesta = 1 ";
         
    
         if ($condicion!=""){
@@ -114,12 +115,12 @@ Class Encuesta{
     
 
     
-    function eliminarEncuesta(Encuesta $encuesta){
+    function deshabilitarEncuesta(Encuesta $encuesta){
         
         $id_encuesta     = $encuesta->getId();
         $con             = Conexion::conectar();
         
-        $sql=" DELETE FROM encuesta WHERE id_encuesta='".$id_encuesta."' ";
+        $sql = " UPDATE encuesta SET estado_encuesta= 2 WHERE id_encuesta='$id_encuesta'";
         $result=mysqli_query($con,$sql);
         return $result;
     }
@@ -127,28 +128,37 @@ Class Encuesta{
 
      function verificarAsignarEncuesta(Usuario $usuario, Encuesta $encuesta){
      
-        $reglaevaluacion = $encuesta ->getReglaevaluacion();
+        $reglaevaluacion = "1";
         $id_encuesta     = $encuesta ->getId();
-        $id_usuario      = $usuario  ->getRut();
+        $id_usuario      = $usuario  ->getId();
         $con             = Conexion::conectar();
         
-        $sql="SELECT * FROM usuarioencuesta WHERE id_usuario='$id_usuario' AND id_encuesta='$id_encuesta' AND ( fecha_agregado BETWEEN 'fecha_agregado' AND DATE(DATE_ADD(fecha_agregado, INTERVAL $reglaevaluacion MONTH)) ) ";    
+        $sSelect = " SELECT * ";
+        
+        $sFrom   = " FROM usuario_encuesta ";
+        
+        $sWhere  = " WHERE id_usuario='$id_usuario' AND id_encuesta='$id_encuesta' AND ( fecha_usuario_encuesta BETWEEN fecha_usuario_encuesta AND DATE(DATE_ADD(fecha_usuario_encuesta, INTERVAL $reglaevaluacion MONTH)) ) ";    
+        
+        $sql = " $sSelect $sFrom $sWhere"; 
+            
         $result=mysqli_query($con,$sql);
+     //   print_r($sql);
         return $result;
     }
     
      function asignarEncuesta(Usuario $usuario,Encuesta $encuesta){
          
         $id_encuesta     = $encuesta ->getId();
-        $id_usuario      = $usuario  ->getRut();
+        $id_usuario      = $usuario  ->getid();
         $con             = Conexion::conectar();
          
          
         $fecha_agregado=date("Y-m-d H:i:s");
-        $sql="INSERT INTO usuarioencuesta "
-            ."(id_usuario,id_encuesta,fecha_agregado,estado) "
+        $sql="INSERT INTO usuario_encuesta "
+            ."(id_usuario,id_encuesta,fecha_usuario_encuesta,estado_usuario_encuesta) "
             ."VALUES ('$id_usuario','$id_encuesta','$fecha_agregado',1)";
         $result=mysqli_query($con,$sql);
+   //    print_r($sql);
         return $result;
     }
     

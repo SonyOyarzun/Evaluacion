@@ -5,11 +5,11 @@ include '../Mail/email.php';	//enviar mail
 	if (empty($_POST['seleccion'])) {
            $errors[] = "No ha seleccionado usuarios";
         }else{
-		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+		
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
                 include '../Clases/Encuesta.php';
                 include '../Clases/Usuario.php';
+                $con = Conexion::conectar();
                 
 		$id_encuesta= intval($_POST["id_encuesta"]);
                 $nombre_encuesta= strval($_POST["nombre_encuesta"]);
@@ -19,13 +19,11 @@ include '../Mail/email.php';	//enviar mail
                 $mail=$array[1];
 
                 $usuario = new Usuario();
-                $usuario->setRut($id_usuario);
-                $usuario->setCon($con);
-                
+                $usuario->setId($id_usuario);
+              
                 $encuesta = new Encuesta();
                 $encuesta->setId($id_encuesta);
-                $encuesta->setCon($con);
-                
+
                 $count= mysqli_num_rows(Encuesta::verificarAsignarEncuesta($usuario,$encuesta));
                 if ($count>0){
                        $errors[] = "<br>La Encuesta Ya ha sido a signada este periodo a : ".$id_usuario;

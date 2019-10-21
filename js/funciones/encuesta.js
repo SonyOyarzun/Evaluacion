@@ -1,10 +1,10 @@
 	
 
-function eliminarEncuesta(id)
+function deshabilitarEncuesta(id)
 {
     console.log('eliminar encuesta')
     var q = $("#q").val();
-    if (confirm("Realmente deseas eliminar la encuesta")) {
+    if (confirm("Realmente deseas deshabilitar la encuesta")) {
         $.ajax({
             type: "GET",
             url: "./ajax/buscar_encuesta.php",
@@ -104,12 +104,12 @@ function recuperarEncuesta(){
 
 $( "#guardar_asignar" ).submit(function( event ) { 
   $('#guardar_datos').attr("disabled", true);
-  
+ console.log("asignar general") 
  var parametros = $(this).serialize();
 
 	 $.ajax({
 			type: "POST",
-			url: "ajax/nuevo_asignarEncuesta.php",
+			url: "ajax/nuevo_asignar_encuesta.php",
 			data: parametros,
 			 beforeSend: function(objeto){
 				$("#resultados").html('<img src="./img/ajax-loader.gif"> Cargando...'); 
@@ -133,7 +133,7 @@ console.log("asignar jefatura")
 
 	 $.ajax({
 			type: "POST",
-			url: "ajax/nuevo_asignarEncuesta.php",
+			url: "ajax/nuevo_asignar_encuesta.php",
 			data: parametros,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax_2").html('<img src="./img/ajax-loader.gif"> Cargando...'); 

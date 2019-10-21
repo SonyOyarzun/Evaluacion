@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 }
 require_once ("config/conexion.php"); //Contiene funcion que conecta a la base de datos
 include './Clases/Pregunta.php';
+include './Clases/Departamento.php';
 
 $active_encuestas = "active";
 $title = "Preguntas | Owl Evaluation";
@@ -19,15 +20,15 @@ $nombre_encuesta = $_GET['nombre_encuesta'];
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<?php include("head.php"); ?>
+<?php include("./head.php"); ?>
     </head>
     <body>
 <?php
-include("navbar.php");
-include("modal/registro_pregunta.php");
-include("modal/editar_pregunta.php");
-include("modal/registro_asignarGeneral.php");
-include("modal/registro_asignarJefatura.php");
+include("./navbar.php");
+include("./modal/registro_pregunta.php");
+include("./modal/editar_pregunta.php");
+include("./modal/registro_asignar_general.php");
+include("./modal/registro_asignar_jefatura.php");
 //validar privilegios
 if ($tipo_usuario > 1) {
     
@@ -49,7 +50,7 @@ if ($tipo_usuario > 1) {
 <?php
 if ($tipo_usuario > 2) {
     ?>
-                            <button type='button' class="btn btn-danger" onclick="eliminarEncuesta('<?php echo $id_encuesta; ?>')"><span class="glyphicon glyphicon-trash" ></span> Eliminar Encuesta </button>
+                            <button type='button' class="btn btn-danger" onclick="deshabilitarEncuesta('<?php echo $id_encuesta; ?>')"><span class="glyphicon glyphicon-trash" ></span> Eliminar Encuesta </button>
                             <?php
                         }
                         ?>
@@ -59,11 +60,11 @@ if ($tipo_usuario > 2) {
 <?php
 if ($tipo == 1) {
     ?>    
-                            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#asignar_encuestaG"><span class="glyphicon glyphicon-share" ></span> Asignar Encuesta </button>
+                            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#asignar_encuesta_general"><span class="glyphicon glyphicon-share" ></span> Asignar Encuesta </button>
                             <?php
                         } else {
                             ?>
-                            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#asignar_encuestaJ" onclick="recuperarUsuarioDepartamento(0)"><span class="glyphicon glyphicon-share" ></span> Asignar Encuesta </button>
+                            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#asignar_encuesta_jefatura" onclick="recuperarUsuarioDepartamento(0)"><span class="glyphicon glyphicon-share" ></span> Asignar Encuesta </button>
                             <?php
                         }
                         ?>   
@@ -107,14 +108,14 @@ if ($tipo == 1) {
         </div>
         <hr>
 <?php
-include("footer.php");
+include("./footer.php");
 ?>
 
         <!-- el select proviene de js -->
-        <script type="text/javascript" src="js/funciones/encuesta.js"></script>
-        <script type="text/javascript" src="js/funciones/pregunta.js"></script>
-        <script type="text/javascript" src="js/funciones/usuario.js"></script>
-        <script type="text/javascript" src="js/pregunta_page.js"></script> 
+        <script type="text/javascript" src="./js/funciones/encuesta.js"></script>
+        <script type="text/javascript" src="./js/funciones/pregunta.js"></script>
+        <script type="text/javascript" src="./js/funciones/usuario.js"></script>
+        <script type="text/javascript" src="./js/pregunta_page.js"></script> 
 
     </body>
 </html>

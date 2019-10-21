@@ -7,11 +7,10 @@
         if (!isset($_GET['nombre_encuesta'])){
         header("location: encuesta.php");       
         }
-            
-	/* Connect To Database*/
-	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+   
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
     
+        $con = Conexion::conectar();
 	
 	$active_notificaciones="active";
 	$title=" Evaluacion | Owl Evaluation";
@@ -19,7 +18,7 @@
         $nombre_encuesta=$_GET['nombre_encuesta'];
         $tipo_encuesta=$_GET['tipo_encuesta'];
         $id_asignacion=$_GET['id_asignacion'];
-        $usuario=$_SESSION['id_usuario'];
+        $id_usuario=$_SESSION['id_usuario'];
         
       
         
@@ -29,13 +28,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php include("head.php");?>
+    <?php include("./head.php");?>
   </head>
   <body>
 	<?php
-	include("navbar.php");
+	include("./navbar.php");
         
-        $recuperar_Asignacion= Encuesta::recuperarEncuestaAsignada($usuario,"",$con,"","");
+        $usuario = new Usuario();
+        $usuario->setId($id_usuario);
+        
+        $recuperar_Asignacion= Encuesta::recuperarEncuestaAsignada($usuario);
         $verificacion = mysqli_fetch_array($recuperar_Asignacion);
         //valida que la encuesta por url sea la asignada
         if ($id_encuesta!=$verificacion['id_encuesta']){
@@ -77,13 +79,13 @@
 	</div>
 	<hr>
 	<?php
-	include("footer.php");
+	include("./footer.php");
 	?>
         
          <!-- el select proviene de js -->
 
-         <script type="text/javascript" src="js/funciones/evaluacion.js"></script>
-         <script type="text/javascript" src="js/evaluacion_page.js"></script>
+         <script type="text/javascript" src="./js/funciones/evaluacion.js"></script>
+         <script type="text/javascript" src="./js/evaluacion_page.js"></script>
 
          
          

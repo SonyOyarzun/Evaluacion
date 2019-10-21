@@ -1,7 +1,6 @@
 <?php
 include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
-/* Connect To Database */
-require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+
 require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
 include '../Clases/Pregunta.php';
 include '../Clases/Usuario.php';
@@ -18,26 +17,14 @@ if ($action == 'ajax') {
     $id_departamento = $_SESSION['departamento_usuario'];
     $sWhere = "";
 
-    include 'pagination.php'; //include pagination file
-    //pagination variables
-    $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
-    $per_page = 10; //how much records you want to show
-    $adjacents = 4; //gap between pages after number of adjacents
-    $offset = ($page - 1) * $per_page;
-
     $pregunta = new Pregunta();
-    $pregunta->setId_encuesta($id_encuesta);
+    $pregunta->setEncuesta($id_encuesta);
     $pregunta->setCondicion($sWhere);
-    $pregunta->setOffset($offset);
-    $pregunta->setPer_page($per_page);
-    $pregunta->setCon($con);
 
     $result = Pregunta::recuperarPregunta($pregunta);
 
     $numrows = mysqli_num_rows($result);
-    $total_pages = ceil($numrows / $per_page);
-    $reload = './clientes.php';
-    //main query to fetch the data
+   
     $query = $result;
     //loop through fetched data
     if ($numrows > 0) {

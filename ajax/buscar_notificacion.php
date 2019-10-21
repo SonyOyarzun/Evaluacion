@@ -59,7 +59,7 @@ if ($action == 'ajax') {
             ?>
 
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 thumb text-center ng-scope" ng-repeat="item in records">
-                <a class="thumbnail" href="evaluacion.php?id_encuesta=<?php echo $id_encuesta; ?>&tipo_encuesta=<?php echo $tipo_encuesta; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>&id_asignacion=<?php echo $id_asignacion; ?>">
+                <a class="thumbnail" href="evaluaciones.php?id_encuesta=<?php echo $id_encuesta; ?>&tipo_encuesta=<?php echo $tipo_encuesta; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>&id_asignacion=<?php echo $id_asignacion; ?>">
 
                     <img class="img-responsive" src="img/encuesta.png" alt="<?php echo $comentario_encuesta; ?>">
 

@@ -12,13 +12,13 @@ if (isset($_GET['id'])) {
     $encuesta = new Encuesta();
     $encuesta->setId($id_encuesta);
 
-    if ($delete = Encuesta::eliminarEncuesta($encuesta)) {
+    if ($delete = Encuesta::deshabilitarEncuesta($encuesta)) {
         ?>
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Aviso!</strong> Encuesta eliminada exitosamente.
+            <strong>Aviso!</strong> Encuesta deshabilitada exitosamente.
         </div>
-        <meta http-equiv="refresh" content="2;URL='encuesta.php'" />  
+        <meta http-equiv="refresh" content="2;URL='encuestas.php'" />  
         <?php
     } else {
         ?>
