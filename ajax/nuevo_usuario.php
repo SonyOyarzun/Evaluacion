@@ -65,8 +65,16 @@ if (empty($_POST['nombre'])) {
     //verificar si el usuario ya existe
     $result = Usuario::recuperarUsuario($usuario);
     $verifica = mysqli_num_rows($result);
-    if ($verifica == 1) {
-        $errors[] = "Lo sentimos , el ID de usuario ya está en uso.";
+    if ($verifica == 1) {  
+        
+            $habilitar = Usuario::habilitarUsuario($usuario);
+        
+        if ($habilitar) {
+            $messages[] = "El usuario ha sido habilitado";
+        } else {
+            $errors[] = "Lo sentimos , el ID de usuario ya está en uso.";
+        }
+       
     } else {
  
         $insert = Usuario::registrarUsuario($usuario);

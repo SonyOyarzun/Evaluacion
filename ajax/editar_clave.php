@@ -10,7 +10,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 }
 
 
-if (empty($_POST['mod_rut'])) {
+if (empty($_POST['mod_id'])) {
     $errors[] = "ID vacío";
 } elseif (strlen($_POST['clave-nueva']) < 6) {
     $errors[] = "Contraseña debe contener mas de 6 caracteres ";
@@ -19,13 +19,13 @@ if (empty($_POST['mod_rut'])) {
 } elseif ($_POST['clave-nueva'] !== $_POST['clave-repetir']) {
     $errors[] = "la contraseña y la repetición de la contraseña no son lo mismo";
 } elseif (
-        !empty($_POST['mod_rut']) && !empty($_POST['clave-nueva']) && !empty($_POST['clave-repetir']) && ($_POST['clave-nueva'] === $_POST['clave-repetir'])
+        !empty($_POST['mod_id']) && !empty($_POST['clave-nueva']) && !empty($_POST['clave-repetir']) && ($_POST['clave-nueva'] === $_POST['clave-repetir'])
 ) {
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     include '../Clases/Usuario.php';
     $con = Conexion::conectar();
     
-    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
+    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_id'], ENT_QUOTES)));
 
     $clave = $_POST['clave-nueva'];
     $clave_hash = password_hash($clave, PASSWORD_DEFAULT);

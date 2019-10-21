@@ -15,7 +15,7 @@
                             <label for="clave-nueva" class="col-sm-4 control-label">Nueva clave</label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" id="clave-nueva" placeholder="Nueva clave" pattern=".{6,}" title="Contraseña ( min . 6 caracteres)" required>
-                                <input type="hidden" id="mod_clave_rut">
+                                <input type="hidden" id="mod_clave_id">
                             </div>
                         </div>
                         <div class="form-group">

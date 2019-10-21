@@ -9,7 +9,7 @@ $con = Conexion::conectar();
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 
 if (isset($_GET['id'])) {
-    $id        = mysqli_real_escape_string($con, (strip_tags($_GET['id'], ENT_QUOTES)));
+    $id         = mysqli_real_escape_string($con, (strip_tags($_GET['id'], ENT_QUOTES)));
     
     $usuario    = new Usuario();
     $usuario    ->setId($id);
@@ -100,7 +100,7 @@ if ($action == 'ajax') {
                         <?php
                     } else {
                         ?>
-                        <th>Rut</th>
+                        <th>ID</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Genero</th>
@@ -159,8 +159,8 @@ if ($action == 'ajax') {
 
                             <td ><span class="pull-right">
                                     <a href="#" class='btn btn-default' title='Editar usuario' data-id="<?php echo $id; ?>" data-nombre="<?php echo $nombre; ?>" data-apellido="<?php echo $apellido; ?>" data-genero="<?php echo $id_genero; ?>" data-tipo="<?php echo $id_tipo; ?>" data-departamento="<?php echo $id_departamento; ?>" data-email="<?php echo $mail; ?>" data-toggle="modal" data-target="#editar_usuario"><i class="glyphicon glyphicon-edit"></i></a> 
-                                    <a href="#" class='btn btn-default' title='Cambiar contraseña' data-rut="<?php echo $id; ?>" data-toggle="modal" data-target="#cambiar_clave"><i class="glyphicon glyphicon-cog"></i></a>
-                                    <a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminarUsuario('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+                                    <a href="#" class='btn btn-default' title='Cambiar contraseña' data-id="<?php echo $id; ?>" data-toggle="modal" data-target="#cambiar_clave"><i class="glyphicon glyphicon-cog"></i></a>
+                                    <a href="#" class='btn btn-default' title='Borrar usuario' onclick="deshabilitarUsuario('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
 
                         </tr>
                         <?php

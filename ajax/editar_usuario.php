@@ -35,7 +35,7 @@ if (empty($_POST['mod_nombre'])) {
     include '../Clases/Usuario.php'; // clase con metodos para usuario
     $con = Conexion::conectar();
     
-    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
+    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_id'], ENT_QUOTES)));
     $nombre = mysqli_real_escape_string($con, (strip_tags($_POST["mod_nombre"], ENT_QUOTES)));
     $apellido = mysqli_real_escape_string($con, (strip_tags($_POST["mod_apellido"], ENT_QUOTES)));
     $email = mysqli_real_escape_string($con, (strip_tags($_POST["mod_email"], ENT_QUOTES)));

@@ -124,6 +124,7 @@ Class Usuario{
                  . " usuario.genero_usuario = id_genero "
                  . " AND  usuario.tipo_usuario = tipo_usuario.id_tipo_usuario "
                  . " AND  usuario.departamento_usuario = departamento.id_departamento ";
+                
        
       
    
@@ -133,6 +134,8 @@ Class Usuario{
        
         if ($id!=""){ 
            $sWhere .= " AND usuario.id_usuario = '$id' " ;
+        }else{
+           $sWhere .= " AND  usuario.estado_usuario = 1 "; 
         }
         
         $sWhere.=" ORDER BY usuario.id_usuario DESC ";
@@ -195,6 +198,7 @@ Class Usuario{
         $con    = Conexion::conectar();
         
         $sql = "UPDATE usuario SET clave_usuario='".$clave."' WHERE id_usuario='".$id."'";
+     //   print_r($sql); 
         $result=mysqli_query($con,$sql);
         return $result;
     }
@@ -209,6 +213,15 @@ Class Usuario{
         return $result;
     }
  
+    function habilitarUsuario(Usuario $usuario){
+        
+        $id     = $usuario->getId();
+        $con    = Conexion::conectar();
+        
+        $sql="UPDATE usuario SET estado_usuario = '1' WHERE id_usuario='".$id."'";
+        $result=mysqli_query($con,$sql);
+        return $result;
+    }
 
     function verificarUsuarioPorEvaluar(Historial $historial, Departamento $departamento, Encuesta $encuesta){
         

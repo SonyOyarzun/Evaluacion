@@ -34,7 +34,7 @@ $('#editar_usuario').on('show.bs.modal', function (event) {
 
 $('#cambiar_clave').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) 
-          var rut = button.data('rut') 
+          var rut = button.data('id') 
          
 	  var modal = $(this)
 	  modal.find('.modal-body #mod_clave_id').val(rut)
