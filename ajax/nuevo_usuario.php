@@ -1,0 +1,110 @@
+<?php
+include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
+// checking for minimum PHP version
+if (version_compare(PHP_VERSION, '5.3.7', '<')) {
+    exit("Sorry, Simple PHP Login does not run on a PHP version smaller than 5.3.7 !");
+} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+    require_once("../libraries/password_compatibility_library.php");
+}
+if (empty($_POST['nombre'])) {
+    $errors[] = "Nombres vacíos ";
+} elseif (empty($_POST['apellido'])) {
+    $errors[] = "Apellidos vacíos";
+} elseif (empty(intval($_POST['genero']))) {
+    $errors[] = "Genero vacío";    
+} elseif (empty(intval($_POST['tipo']))) {
+    $errors[] = "Tipo de usuario vacío";
+} elseif (empty(intval($_POST['departamento']))) {
+    $errors[] = "Departamento vacío";    
+} elseif (empty($_POST['email'])) {
+    $errors[] = "El correo electrónico no puede estar vacío";
+} elseif (strlen($_POST['email']) > 64) {
+    $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
+} elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Su correo electrónico no está en un formato válido";    
+} elseif (empty($_POST['password_nueva']) || empty($_POST['password_repetir'])) {
+    $errors[] = "Contraseña vacía";
+} elseif ($_POST['password_nueva'] !== $_POST['password_repetir']) {
+    $errors[] = "la contraseña y la repetición de la contraseña no son lo mismo";
+} elseif (strlen($_POST['password_nueva']) < 6) {
+    $errors[] = "La contraseña debe tener como mínimo 6 caracteres";
+} elseif (strlen($_POST['rut']) > 13 || strlen($_POST['rut']) < 2) {
+    $errors[] = "rut no puede ser inferior a 2 o más de 13 caracteres";
+} elseif (
+        !empty($_POST['rut']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && strlen($_POST['rut']) <= 64 && strlen($_POST['rut']) >= 2 && !empty($_POST['email']) && strlen($_POST['email']) <= 64 && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && !empty($_POST['password_nueva']) && !empty($_POST['password_repetir']) && ($_POST['password_nueva'] === $_POST['password_repetir'])
+) {
+    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+    require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
+    include '../Clases/Usuario.php';
+
+    $rut            = mysqli_real_escape_string($con, (strip_tags($_POST["rut"]         , ENT_QUOTES)));
+    $nombre         = mysqli_real_escape_string($con, (strip_tags($_POST["nombre"]      , ENT_QUOTES)));
+    $apellido       = mysqli_real_escape_string($con, (strip_tags($_POST["apellido"]    , ENT_QUOTES)));
+    $email          = mysqli_real_escape_string($con, (strip_tags($_POST["email"]       , ENT_QUOTES)));
+    $tipo           = mysqli_real_escape_string($con, (strip_tags($_POST["tipo"]        , ENT_QUOTES)));
+    $genero         = mysqli_real_escape_string($con, (strip_tags($_POST["genero"]      , ENT_QUOTES)));
+    $departamento   = mysqli_real_escape_string($con, (strip_tags($_POST["departamento"], ENT_QUOTES)));
+
+    //codifica la clave
+    $clave = $_POST['password_nueva'];
+    $clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+
+    //objeto recibe variables
+    $usuario = new Usuario();
+    
+    $usuario->setRut($rut);
+    $usuario->setNombre($nombre);
+    $usuario->setApellido($apellido);
+    $usuario->setMail($email);
+    $usuario->setTipo_usuario($tipo);
+    $usuario->setGenero($genero);
+    $usuario->setDepartamento($departamento);
+    $usuario->setClave($clave_hash);
+    $usuario->setCon($con);
+    
+    //verificar si el usuario ya existe
+    $result = Usuario::recuperarUsuario($usuario);
+    $verifica = mysqli_num_rows($result);
+    if ($verifica == 1) {
+        $errors[] = "Lo sentimos , el ID de usuario ya está en uso.";
+    } else {
+ 
+        $insert = Usuario::registrarUsuario($usuario);
+
+        if ($insert) {
+            $messages[] = "La cuenta ha sido creada con éxito.";
+        } else {
+            $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
+        }
+    }
+} else {
+    $errors[] = "Un error desconocido ocurrió.";
+}
+
+if (isset($errors)) {
+    ?>
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> 
+    <?php
+    foreach ($errors as $error) {
+        echo $error;
+    }
+    ?>
+    </div>
+    <?php
+}
+if (isset($messages)) {
+    ?>
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Bien hecho!</strong>
+        <?php
+        foreach ($messages as $message) {
+            echo $message;
+        }
+        ?>
+    </div>
+    <?php
+}
+?>
