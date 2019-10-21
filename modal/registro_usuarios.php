@@ -1,6 +1,4 @@
-<?php
-if (isset($con)) {
-    ?>
+
     <!-- Modal -->
     <div class="modal fade" id="nuevo_usuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -39,10 +37,7 @@ if (isset($con)) {
                                 <select class='form-control' name='genero' id='genero' required>
                                     <option value="">Selecciona un Genero</option>
                                     <?php
-                                    $genero = new Genero();
-                                    $genero->setCon($con);
-                                    
-                                    $query_genero = Genero::recuperarGenero($genero);
+                                    $query_genero = Genero::recuperarGenero();
                                     while ($rw = mysqli_fetch_array($query_genero)) {
                                         ?>
                                         <option value="<?php echo $rw['id_genero']; ?>"><?php echo $rw['nombre_genero']; ?></option>			
@@ -59,13 +54,10 @@ if (isset($con)) {
                                 <select class='form-control' name='tipo' id='tipo' required>
                                     <option value="">Selecciona un Tipo</option>
                                     <?php
-                                    $tipo_usuario = new TipoUsuario();
-                                    $tipo_usuario->setCon($con);
-                                    
-                                    $query_tipo = TipoUsuario::recuperarTipoUsuario($tipo_usuario);
+                                    $query_tipo = TipoUsuario::recuperarTipoUsuario();
                                     while ($rw = mysqli_fetch_array($query_tipo)) {
                                         ?>
-                                        <option value="<?php echo $rw['id_tipo']; ?>"><?php echo $rw['nombre_tipo']; ?></option>			
+                                        <option value="<?php echo $rw['id_tipo_usuario']; ?>"><?php echo $rw['nombre_tipo_usuario']; ?></option>			
                                         <?php
                                     }
                                     ?>
@@ -79,6 +71,7 @@ if (isset($con)) {
                                 <select class='form-control' name='departamento' id='departamento' required>
                                     <option value="">Selecciona un Departamento</option>
                                     <?php
+                                    /*
                                     $departamento = new Departamento();
                                     $departamento->setCon($con);
                                     $query_departamento = Departamento::recuperarDepartamento($departamento);
@@ -86,7 +79,7 @@ if (isset($con)) {
                                         ?>
                                         <option value="<?php echo $rw['id_departamento']; ?>"><?php echo $rw['nombre_departamento']; ?></option>			
                                         <?php
-                                    }
+                                    }*/
                                     ?>
                                 </select>			  
                             </div>
@@ -120,6 +113,3 @@ if (isset($con)) {
             </div>
         </div>
     </div>
-    <?php
-}
-?>

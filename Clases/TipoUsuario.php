@@ -24,16 +24,16 @@ Class TipoUsuario{
 
     
  // metodos
-    function recuperarTipoUsuario(TipoUsuario $tipo_usuario) {
+    function recuperarTipoUsuario() {
 
-        $con = $tipo_usuario->getCon();
+        $con = Conexion::conectar();
         
-        $sSelect = " SELECT id_tipo,nombre_tipo";
-        $sTable  = " FROM  tipo ";
-        $sWhere  = " ";
+        $sSelect = " SELECT id_tipo_usuario, nombre_tipo_usuario ";
+        $sTable  = " FROM  tipo_usuario ";
+        $sWhere  = "";
  
        
-        $sWhere.=" order by id_tipo ";
+        $sWhere.=" order by id_tipo_usuario ";
         
 
         $sql = " $sSelect $sTable $sWhere ";

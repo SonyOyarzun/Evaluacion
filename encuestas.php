@@ -15,11 +15,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php include("head.php");?>
+    <?php include("./head.php");?>
   </head>
   <body>
 	<?php
-	include("navbar.php");
+	include("./navbar.php");
           //validar privilegios
         if($tipo_usuario>1){
             
@@ -39,8 +39,8 @@
 		<div class="panel-body">
 
 			<?php
-			include("modal/registro_encuesta.php");
-			include("modal/editar_encuesta.php");
+			include("./modal/registro_encuesta.php");
+			include("./modal/editar_encuesta.php");
 			?>
                     
 			<form class="form-horizontal" role="form" id="datos">
@@ -92,10 +92,10 @@
 	</div>
 	<hr>
 	<?php
-	include("footer.php");
+	include("./footer.php");
 	?>
-        <script type="text/javascript" src="js/funciones/encuesta.js"></script>
-        <script type="text/javascript" src="js/encuesta_page.js"></script>
+        <script type="text/javascript" src="./js/funciones/encuesta.js"></script>
+        <script type="text/javascript" src="./js/encuesta_page.js"></script>
   </body>
 </html>
 

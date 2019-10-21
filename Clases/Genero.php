@@ -6,18 +6,12 @@ Class Genero{
     private $id;
     private $nombre;
     
-    private $con;
-    
     function getId() {
         return $this->id;
     }
 
     function getNombre() {
         return $this->nombre;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setId($id) {
@@ -28,18 +22,19 @@ Class Genero{
         $this->nombre = $nombre;
     }
 
-    function setCon($con) {
-        $this->con = $con;
-    }
-
-            
+    
+    
  // metodos
-    function recuperarGenero(Genero $genero) {
+    function recuperarGenero() {
 
-        $con = $genero->getCon();
+        $con = Conexion::conectar();
         
-        $sSelect = " SELECT id_genero,nombre_genero";
-        $sTable  = " FROM  genero ";
+        $sSelect = " SELECT "
+                . " id_genero, nombre_genero ";
+        
+        $sTable  = " FROM "
+                 . " genero ";
+        
         $sWhere  = "";
    
        
@@ -47,7 +42,7 @@ Class Genero{
         
 
         $sql = " $sSelect $sTable $sWhere ";
-
+  //      print_r($sql);
         $result = mysqli_query($con, $sql);
         return $result;
     }
