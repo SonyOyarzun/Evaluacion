@@ -14,10 +14,7 @@ Class Usuario{
     private $fecha;
     
     private $condicion;
-    private $offset;
-    private $per_page;
-    private $con;
-            
+
     function getId() {
         return $this->id;
     }
@@ -56,18 +53,6 @@ Class Usuario{
 
     function getCondicion() {
         return $this->condicion;
-    }
-
-    function getOffset() {
-        return $this->offset;
-    }
-
-    function getPer_page() {
-        return $this->per_page;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setId($id) {
@@ -110,33 +95,25 @@ Class Usuario{
         $this->condicion = $condicion;
     }
 
-    function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    function setPer_page($per_page) {
-        $this->per_page = $per_page;
-    }
-
-    function setCon($con) {
-        $this->con = $con;
-    }
-
-    
-    
+        
     // metodos
     function recuperarUsuario(Usuario $usuario) {
 
-        $rut        = $usuario->getRut();
-        $condicion  = $usuario->getCondicion();
-        $offset     = $usuario->getOffset();
-        $per_page   = $usuario->getPer_page();  
-        $con        = $usuario->getCon();
+        $id         = $usuario->getId();
+        $condicion  = $usuario->getCondicion();  
+        $con        = Conexion::conectar();
         
-        $sTable = " usuario, genero, tipo, departamento ";
-        $sWhere = " WHERE usuario.genero_usuario = id_genero "
-                . " AND  usuario.tipo_usuario = tipo.id_tipo "
-                . " AND  usuario.departamento_usuario = departamento.id_departamento ";
+        $sSelect = " SELECT "
+                 . " id_usuario, nombre_usuario, apellido_usuario, id_genero, nombre_genero ,"
+                 . " id_departamento, nombre_departamento, mail_usuario, id_tipo_usuario, nombre_tipo_usuario, fecha_usuario";
+        
+        $sTable  = " FROM "
+                 . " usuario, genero, tipo_usuario, departamento ";
+        
+        $sWhere  = " WHERE "
+                 . " usuario.genero_usuario = id_genero "
+                 . " AND  usuario.tipo_usuario = tipo_usuario.id_tipo_usuario "
+                 . " AND  usuario.departamento_usuario = departamento.id_departamento ";
        
       
    
@@ -144,26 +121,23 @@ Class Usuario{
            $sWhere .= $condicion;
         }
        
-        if ($rut!=""){ 
-           $sWhere .= " AND usuario.id_usuario = '$rut' " ;
+        if ($id!=""){ 
+           $sWhere .= " AND usuario.id_usuario = '$id' " ;
         }
         
         $sWhere.=" ORDER BY usuario.id_usuario DESC ";
-        
-         if (($offset!="")&&($per_page!="")){
-           $sWhere .= " LIMIT $offset,$per_page ";
-        }
 
-        $sql = " SELECT * FROM  $sTable $sWhere ";
+
+        $sql = " $sSelect   $sTable $sWhere ";
 
         $result = mysqli_query($con, $sql);
- //     print_r($sql);
+     // print_r($sql);
         return $result;
     }
 
       function registrarUsuario(Usuario $usuario){
       
-      $rut          = $usuario->getRut();
+      $rut          = $usuario->getId();
       $nombre       = $usuario->getNombre();
       $apellido     = $usuario->getApellido();
       $clave_hash   = $usuario->getClave();
@@ -171,7 +145,7 @@ Class Usuario{
       $tipo         = $usuario->getTipo_usuario();
       $genero       = $usuario->getGenero();
       $departamento = $usuario->getDepartamento();
-      $con          = $usuario->getCon();
+      $con          = Conexion::conectar();
               
       $fechaAgregado=date("Y-m-d H:i:s");
         
@@ -187,40 +161,40 @@ Class Usuario{
     
      function editarUsuario(Usuario $usuario){
          
-      $rut          = $usuario->getRut();
+      $id           = $usuario->getId();
       $nombre       = $usuario->getNombre();
       $apellido     = $usuario->getApellido();
       $email        = $usuario->getMail();
       $tipo         = $usuario->getTipo_usuario();
       $genero       = $usuario->getGenero();
       $departamento = $usuario->getDepartamento();
-      $con          = $usuario->getCon(); 
+      $con          = Conexion::conectar();
          
         $sql="UPDATE usuario "
             ."SET nombre_usuario='".$nombre."', apellido_usuario='".$apellido."', mail_usuario ='".$email."', "
             ."tipo_usuario='".$tipo."', genero_usuario='".$genero."', departamento_usuario='".$departamento."' "
-            ."WHERE id_usuario='".$rut."';";
+            ."WHERE id_usuario='".$id."';";
         $result=mysqli_query($con,$sql);
         return $result;
     }
     
      function editarClave(Usuario $usuario){
          
-        $rut    = $usuario->getRut();
+        $id     = $usuario->getId();
         $clave  = $usuario->getClave();
-        $con    = $usuario->getCon();
+        $con    = Conexion::conectar();
         
-        $sql = "UPDATE usuario SET clave_usuario='".$clave."' WHERE id_usuario='".$rut."'";
+        $sql = "UPDATE usuario SET clave_usuario='".$clave."' WHERE id_usuario='".$id."'";
         $result=mysqli_query($con,$sql);
         return $result;
     }
     
     function eliminarUsuario(Usuario $usuario){
         
-        $rut    = $usuario->getRut();
-        $con    = $usuario->getCon();
+        $id     = $usuario->getId();
+        $con    = Conexion::conectar();
         
-        $sql="DELETE FROM usuario WHERE id_usuario='".$rut."'";
+        $sql="DELETE FROM usuario WHERE id_usuario='".$id."'";
         $result=mysqli_query($con,$sql);
         return $result;
     }
@@ -231,7 +205,7 @@ Class Usuario{
        $id_asignacion   = $historial    ->getId_asignacion();
        $id_departamento = $departamento ->getId();
        $tipo            = $encuesta     ->getTipo();
-       $con             = $encuesta     ->getCon();
+       $con             = Conexion::conectar();
 
         
          $Excep = " SELECT usuario.id_usuario "

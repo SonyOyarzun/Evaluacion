@@ -156,8 +156,6 @@ Class Encuesta{
 
         $id_usuario    = $usuario  ->getId();
         $condicion     = $usuario  ->getCondicion();
-        $offset        = $usuario  ->getOffset();
-        $per_page      = $usuario  ->getPer_page();
         $con           = Conexion::conectar();
                 
         $sSelect = " SELECT "
@@ -185,10 +183,6 @@ Class Encuesta{
         }
        
         $sWhere.=" ORDER BY id_encuesta ";
-        
-         if (($offset!="")&&($per_page!="")){
-           $sWhere .= " LIMIT $offset,$per_page ";
-        }
    
         $sql = " $sSelect  $sTable $sWhere ";
 

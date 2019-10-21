@@ -6,7 +6,6 @@
         }
 
 	/* Connecta a BD*/
-	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
         include './Clases/Genero.php';
         include './Clases/TipoUsuario.php';
@@ -55,18 +54,8 @@
 								<input type="text" class="form-control" id="q" placeholder="Nombre" onkeyup='load(1);'>
 							</div>
 							
-							
-							
-							<div class="col-md-3">
-								<button type="button" class="btn btn-default" onclick='load(1);'>
-									<span class="glyphicon glyphicon-search" ></span> Buscar</button>
-								<span id="loader"></span>
-							</div>
-							
 						</div>
-				
-				
-				
+	
 			</form>
 				<div id="resultados"></div><!-- Carga los datos ajax -->
 				<div class='outer_div'></div><!-- Carga los datos ajax -->			
