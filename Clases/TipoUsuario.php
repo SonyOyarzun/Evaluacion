@@ -6,18 +6,12 @@ Class TipoUsuario{
     private $id;
     private $nombre;
     
-    private $con;
-    
     function getId() {
         return $this->id;
     }
 
     function getNombre() {
         return $this->nombre;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setId($id) {
@@ -28,12 +22,7 @@ Class TipoUsuario{
         $this->nombre = $nombre;
     }
 
-    function setCon($con) {
-        $this->con = $con;
-    }
-
     
-                
  // metodos
     function recuperarTipoUsuario(TipoUsuario $tipo_usuario) {
 

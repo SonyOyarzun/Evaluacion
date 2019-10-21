@@ -10,10 +10,7 @@ class Calificacion {
    private $fecha;
     
    private $condicion;
-   private $offset;
-   private $per_page;
-   private $con;
-   
+
    function getId() {
        return $this->id;
    }
@@ -40,18 +37,6 @@ class Calificacion {
 
    function getCondicion() {
        return $this->condicion;
-   }
-
-   function getOffset() {
-       return $this->offset;
-   }
-
-   function getPer_page() {
-       return $this->per_page;
-   }
-
-   function getCon() {
-       return $this->con;
    }
 
    function setId($id) {
@@ -82,19 +67,7 @@ class Calificacion {
        $this->condicion = $condicion;
    }
 
-   function setOffset($offset) {
-       $this->offset = $offset;
-   }
-
-   function setPer_page($per_page) {
-       $this->per_page = $per_page;
-   }
-
-   function setCon($con) {
-       $this->con = $con;
-   }
-
-      
+         
       function registrarCalificacion(Calificacion $calificacion){
       
       $id_pregunta   = $calificacion->getId_pregunta();

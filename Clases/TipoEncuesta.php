@@ -4,19 +4,13 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Evaluacion/config/conexion.php');
 class TipoEncuesta {
  private $id_tipo;
  private $nombre_tipo;
- 
- private $con;
-  
+
  function getId_tipo() {
      return $this->id_tipo;
  }
 
  function getNombre_tipo() {
      return $this->nombre_tipo;
- }
-
- function getCon() {
-     return $this->con;
  }
 
  function setId_tipo($id_tipo) {
@@ -27,12 +21,8 @@ class TipoEncuesta {
      $this->nombre_tipo = $nombre_tipo;
  }
 
- function setCon($con) {
-     $this->con = $con;
- }
-
-   
- // metodos
+ 
+  // metodos
     function recuperarTipoEncuesta(TipoEncuesta $tipo_encuesta) {
 
         $con = $tipo_encuesta->getCon();

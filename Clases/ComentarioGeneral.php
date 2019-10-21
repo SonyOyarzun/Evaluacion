@@ -10,9 +10,6 @@ class ComentarioGeneral {
     private $fecha;
     
     private $condicion;
-    private $offset;
-    private $per_page;
-    private $con;
 
     function getEncuesta() {
         return $this->encuesta;
@@ -36,18 +33,6 @@ class ComentarioGeneral {
 
     function getCondicion() {
         return $this->condicion;
-    }
-
-    function getOffset() {
-        return $this->offset;
-    }
-
-    function getPer_page() {
-        return $this->per_page;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setEncuesta($encuesta) {
@@ -74,19 +59,7 @@ class ComentarioGeneral {
         $this->condicion = $condicion;
     }
 
-    function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    function setPer_page($per_page) {
-        $this->per_page = $per_page;
-    }
-
-    function setCon($con) {
-        $this->con = $con;
-    }
-
-                
+                    
         // metodos
     function recuperarComentario($encuesta,$usuario) {
 

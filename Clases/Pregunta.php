@@ -10,9 +10,6 @@ Class Pregunta{
     private $fecha;
     
     private $condicion;
-    private $offset;
-    private $per_page;
-    private $con;
 
     function getId() {
         return $this->id;
@@ -36,18 +33,6 @@ Class Pregunta{
 
     function getCondicion() {
         return $this->condicion;
-    }
-
-    function getOffset() {
-        return $this->offset;
-    }
-
-    function getPer_page() {
-        return $this->per_page;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setId($id) {
@@ -74,20 +59,7 @@ Class Pregunta{
         $this->condicion = $condicion;
     }
 
-    function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    function setPer_page($per_page) {
-        $this->per_page = $per_page;
-    }
-
-    function setCon($con) {
-        $this->con = $con;
-    }
-
-        
-         
+             
      // metodos
     function recuperarPregunta(Pregunta $pregunta) {
 
