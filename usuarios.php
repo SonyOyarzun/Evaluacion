@@ -42,8 +42,8 @@
 		</div>			
 			<div class="panel-body">
 			<?php
-			include("modal/registro_usuarios.php");
-			include("modal/editar_usuarios.php");
+			include("modal/registro_usuario.php");
+			include("modal/editar_usuario.php");
 			include("modal/cambiar_clave.php");
 			?>
 			<form class="form-horizontal" role="form">

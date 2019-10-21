@@ -65,7 +65,7 @@ if ($action == 'ajax') {
                                 $query_tipo = Usuario::verificarUsuarioPorEvaluar($historial, $departamento, $encuesta);
                                 while ($rw = mysqli_fetch_array($query_tipo)) {
 
-                                    $rut = $rw['id_usuario'];
+                                    $id = $rw['id_usuario'];
                                     $nombre = $rw['nombre_usuario'];
                                     $apellido = $rw['apellido_usuario'];
 
@@ -74,7 +74,7 @@ if ($action == 'ajax') {
                                         $apellido = "evaluacion";
                                     }
                                     ?>
-                                    <option value="<?php echo $rut; ?>"><?php echo "[" . $rut . "] - " . $nombre . " " . $apellido ?></option>			
+                                    <option value="<?php echo $id; ?>"><?php echo "[" . $id . "] - " . $nombre . " " . $apellido ?></option>			
                                     <?php
                                 }
                                 ?>

@@ -21,7 +21,7 @@ function recuperarUsuarios(){
 
 function registrarUsuario() {
 
-    var rut                 = $("#rut")             .val();
+    var id                  = $("#id")              .val();
     var nombre              = $("#nombre")          .val();
     var apellido            = $("#apellido")        .val();
     var genero              = $("#genero")          .val();
@@ -32,7 +32,7 @@ function registrarUsuario() {
     var password_repetir    = $("#password_repetir").val();
 
     var parametros = {
-        'rut'               : rut,
+        'id'                : id,
         'nombre'            : nombre,
         'apellido'          : apellido,
         'genero'            : genero,
@@ -62,7 +62,7 @@ function registrarUsuario() {
 
 function editarUsuario() {
 
-    var rut             = $("#mod_rut")         .val();
+    var id              = $("#mod_id")          .val();
     var nombre          = $("#mod_nombre")      .val();
     var apellido        = $("#mod_apellido")    .val();
     var genero          = $("#mod_genero")      .val();
@@ -71,7 +71,7 @@ function editarUsuario() {
     var departamento    = $("#mod_departamento").val();
 
     var parametros = {
-        'mod_rut'           : rut,
+        'mod_id'            : id,
         'mod_nombre'        : nombre,
         'mod_apellido'      : apellido,
         'mod_genero'        : genero,
@@ -98,12 +98,12 @@ function editarUsuario() {
 
 function editarClave() {
 
-    var mod_rut          = $("#mod_clave_rut")      .val();
+    var mod_id           = $("#mod_clave_id") .val();
     var clave_nueva      = $("#clave-nueva")  .val();
     var clave_repetir    = $("#clave-repetir").val();
 
     var parametros = {
-        'mod_rut'       : mod_rut,
+        'mod_id'        : mod_id,
         'clave-nueva'   : clave_nueva,
         'clave-repetir' : clave_repetir,
 
@@ -124,13 +124,13 @@ function editarClave() {
 }
 
 
-function eliminarUsuario(rut)
+function deshabilitarUsuario(id)
 {
-    if (confirm("Realmente deseas eliminar el usuario")) {
+    if (confirm("Realmente deseas deshabilitar el usuario")) {
         $.ajax({
             type: "GET",
             url: "./ajax/buscar_usuarios.php",
-            data: "rut=" + rut,
+            data: "id=" + id,
             beforeSend: function (objeto) {
                 $("#resultados").html("Mensaje: Cargando...");
             },

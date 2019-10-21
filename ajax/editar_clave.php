@@ -21,20 +21,19 @@ if (empty($_POST['mod_rut'])) {
 } elseif (
         !empty($_POST['mod_rut']) && !empty($_POST['clave-nueva']) && !empty($_POST['clave-repetir']) && ($_POST['clave-nueva'] === $_POST['clave-repetir'])
 ) {
-    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     include '../Clases/Usuario.php';
-
-    $rut = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
+    $con = Conexion::conectar();
+    
+    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
 
     $clave = $_POST['clave-nueva'];
     $clave_hash = password_hash($clave, PASSWORD_DEFAULT);
 
     $usuario = new Usuario();
     
-    $usuario->setRut($rut);
+    $usuario->setId($id);
     $usuario->setClave($clave_hash);
-    $usuario->setCon($con);
     
     $query = Usuario::editarClave($usuario);
 

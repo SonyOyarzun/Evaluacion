@@ -31,11 +31,11 @@ if (empty($_POST['mod_nombre'])) {
 } elseif (
         !empty($_POST['mod_email']) && !empty($_POST['mod_nombre']) && !empty($_POST['mod_apellido']) && strlen($_POST['mod_email']) <= 64 && strlen($_POST['mod_email']) >= 2 && !empty($_POST['mod_email']) && strlen($_POST['mod_email']) <= 64 && filter_var($_POST['mod_email'], FILTER_VALIDATE_EMAIL)
 ) {
-    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     include '../Clases/Usuario.php'; // clase con metodos para usuario
-
-    $rut = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
+    $con = Conexion::conectar();
+    
+    $id = mysqli_real_escape_string($con, (strip_tags($_POST['mod_rut'], ENT_QUOTES)));
     $nombre = mysqli_real_escape_string($con, (strip_tags($_POST["mod_nombre"], ENT_QUOTES)));
     $apellido = mysqli_real_escape_string($con, (strip_tags($_POST["mod_apellido"], ENT_QUOTES)));
     $email = mysqli_real_escape_string($con, (strip_tags($_POST["mod_email"], ENT_QUOTES)));
@@ -44,19 +44,18 @@ if (empty($_POST['mod_nombre'])) {
     $departamento = intval($_POST["mod_departamento"]);
 
     
-    if ($_SESSION['id_usuario'] == $rut) {
+    if ($_SESSION['id_usuario'] == $id) {
         $errors[] = "El administrador no puede ser modificado.";
     } else {
         
         $usuario = new Usuario();
-        $usuario->setRut($rut);
+        $usuario->setId($id);
         $usuario->setNombre($nombre);
         $usuario->setApellido($apellido);
         $usuario->setMail($email);
-        $usuario->setTipo_usuario($tipo);
+        $usuario->setTipo($tipo);
         $usuario->setGenero($genero);
         $usuario->setDepartamento($departamento);
-        $usuario->setCon($con);
         
         $update = Usuario::editarUsuario($usuario);
 

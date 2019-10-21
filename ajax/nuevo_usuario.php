@@ -28,16 +28,17 @@ if (empty($_POST['nombre'])) {
     $errors[] = "la contraseña y la repetición de la contraseña no son lo mismo";
 } elseif (strlen($_POST['password_nueva']) < 6) {
     $errors[] = "La contraseña debe tener como mínimo 6 caracteres";
-} elseif (strlen($_POST['rut']) > 13 || strlen($_POST['rut']) < 2) {
-    $errors[] = "rut no puede ser inferior a 2 o más de 13 caracteres";
+} elseif (strlen($_POST['id']) > 13 || strlen($_POST['id']) < 2) {
+    $errors[] = "ID no puede ser inferior a 2 o más de 13 caracteres";
 } elseif (
-        !empty($_POST['rut']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && strlen($_POST['rut']) <= 64 && strlen($_POST['rut']) >= 2 && !empty($_POST['email']) && strlen($_POST['email']) <= 64 && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && !empty($_POST['password_nueva']) && !empty($_POST['password_repetir']) && ($_POST['password_nueva'] === $_POST['password_repetir'])
+        !empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && strlen($_POST['id']) <= 64 && strlen($_POST['id']) >= 2 && !empty($_POST['email']) && strlen($_POST['email']) <= 64 && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && !empty($_POST['password_nueva']) && !empty($_POST['password_repetir']) && ($_POST['password_nueva'] === $_POST['password_repetir'])
 ) {
-    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     include '../Clases/Usuario.php';
 
-    $rut            = mysqli_real_escape_string($con, (strip_tags($_POST["rut"]         , ENT_QUOTES)));
+    $con = Conexion::conectar();
+    
+    $id            = mysqli_real_escape_string($con, (strip_tags($_POST["id"]         , ENT_QUOTES)));
     $nombre         = mysqli_real_escape_string($con, (strip_tags($_POST["nombre"]      , ENT_QUOTES)));
     $apellido       = mysqli_real_escape_string($con, (strip_tags($_POST["apellido"]    , ENT_QUOTES)));
     $email          = mysqli_real_escape_string($con, (strip_tags($_POST["email"]       , ENT_QUOTES)));
@@ -52,16 +53,15 @@ if (empty($_POST['nombre'])) {
     //objeto recibe variables
     $usuario = new Usuario();
     
-    $usuario->setRut($rut);
+    $usuario->setId($id);
     $usuario->setNombre($nombre);
     $usuario->setApellido($apellido);
     $usuario->setMail($email);
-    $usuario->setTipo_usuario($tipo);
+    $usuario->setTipo($tipo);
     $usuario->setGenero($genero);
     $usuario->setDepartamento($departamento);
     $usuario->setClave($clave_hash);
-    $usuario->setCon($con);
-    
+
     //verificar si el usuario ya existe
     $result = Usuario::recuperarUsuario($usuario);
     $verifica = mysqli_num_rows($result);

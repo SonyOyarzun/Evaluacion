@@ -8,12 +8,11 @@ $con = Conexion::conectar();
 
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 
-if (isset($_GET['rut'])) {
-    $rut        = mysqli_real_escape_string($con, (strip_tags($_GET['rut'], ENT_QUOTES)));
+if (isset($_GET['id'])) {
+    $id        = mysqli_real_escape_string($con, (strip_tags($_GET['id'], ENT_QUOTES)));
     
     $usuario    = new Usuario();
-    $usuario    ->setRut($rut);
-    $usuario    ->setCon($con);
+    $usuario    ->setId($id);
     
     $query = Usuario::recuperarUsuario($usuario);
     
@@ -22,11 +21,11 @@ if (isset($_GET['rut'])) {
     $excep = $rw_usuario['id_usuario'];
     //si usuario es el administrador, no se podra eliminar
     if ($excep != '00.000.000-0') {
-        if ($delete = Usuario::eliminarUsuario($usuario)) {
+        if ($delete = Usuario::deshabilitarUsuario($usuario)) {
             ?>
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Aviso!</strong> Usuario eliminado exitosamente.
+                <strong>Aviso!</strong> Usuario deshabilitado exitosamente.
             </div>
             <?php
         } else {
@@ -41,7 +40,7 @@ if (isset($_GET['rut'])) {
         ?>
         <div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> No se puede borrar el usuario administrador. 
+            <strong>Error!</strong> No se puede deshabilitar el usuario administrador. 
         </div>
         <?php
     }
@@ -116,7 +115,7 @@ if ($action == 'ajax') {
                 </tr>
                 <?php
                 while ($row = mysqli_fetch_array($result)) {
-                    $rut = $row['id_usuario'];
+                    $id = $row['id_usuario'];
                     $nombre = $row['nombre_usuario'];
                     $apellido = $row['apellido_usuario'];
                     $id_genero = $row['id_genero'];
@@ -129,26 +128,26 @@ if ($action == 'ajax') {
                     $fecha = date('d/m/Y', strtotime($row['fecha_usuario']));
                     ?>
 
-                    <input type="hidden" value="<?php echo $row['nombre_usuario']; ?>" id="nombres<?php echo $rut; ?>">
-                    <input type="hidden" value="<?php echo $row['apellido_usuario']; ?>" id="apellidos<?php echo $rut; ?>">
-                    <input type="hidden" value="<?php echo $rut; ?>" id="usuario<?php echo $rut; ?>">
-                    <input type="hidden" value="<?php echo $mail; ?>" id="email<?php echo $rut; ?>">
+                    <input type="hidden" value="<?php echo $row['nombre_usuario']; ?>" id="nombres<?php echo $id; ?>">
+                    <input type="hidden" value="<?php echo $row['apellido_usuario']; ?>" id="apellidos<?php echo $id; ?>">
+                    <input type="hidden" value="<?php echo $id; ?>" id="usuario<?php echo $id; ?>">
+                    <input type="hidden" value="<?php echo $mail; ?>" id="email<?php echo $id; ?>">
 
                     <tr>
                         <?php
                         if (isset($_GET['id_departamento'])) {
                             ?>                         
-                            <td><?php echo $rut; ?></td>
+                            <td><?php echo $id; ?></td>
                             <td><?php echo $nombre; ?></td>
                             <td ><?php echo $apellido; ?></td>
                             <td ><?php echo $genero; ?></td>
                             <td ><?php echo $tipo; ?></td>
-                            <td ><input class="form-control" type="checkbox" name="seleccion[]" checked="" id="seleccion" value="<?php echo $rut . "," . $mail ?>"></td>
+                            <td ><input class="form-control" type="checkbox" name="seleccion[]" checked="" id="seleccion" value="<?php echo $id . "," . $mail ?>"></td>
 
                             <?php
                         } else {
                             ?>
-                            <td><?php echo $rut; ?></td>
+                            <td><?php echo $id; ?></td>
                             <td><?php echo $nombre; ?></td>
                             <td ><?php echo $apellido; ?></td>
                             <td ><?php echo $genero; ?></td>
@@ -159,9 +158,9 @@ if ($action == 'ajax') {
 
 
                             <td ><span class="pull-right">
-                                    <a href="#" class='btn btn-default' title='Editar usuario' data-id="<?php echo $rut; ?>" data-nombre="<?php echo $nombre; ?>" data-apellido="<?php echo $apellido; ?>" data-genero="<?php echo $id_genero; ?>" data-tipo="<?php echo $id_tipo; ?>" data-departamento="<?php echo $id_departamento; ?>" data-email="<?php echo $mail; ?>" data-toggle="modal" data-target="#editar_usuario"><i class="glyphicon glyphicon-edit"></i></a> 
-                                    <a href="#" class='btn btn-default' title='Cambiar contraseña' data-rut="<?php echo $rut; ?>" data-toggle="modal" data-target="#cambiar_clave"><i class="glyphicon glyphicon-cog"></i></a>
-                                    <a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminarUsuario('<?php echo $rut; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+                                    <a href="#" class='btn btn-default' title='Editar usuario' data-id="<?php echo $id; ?>" data-nombre="<?php echo $nombre; ?>" data-apellido="<?php echo $apellido; ?>" data-genero="<?php echo $id_genero; ?>" data-tipo="<?php echo $id_tipo; ?>" data-departamento="<?php echo $id_departamento; ?>" data-email="<?php echo $mail; ?>" data-toggle="modal" data-target="#editar_usuario"><i class="glyphicon glyphicon-edit"></i></a> 
+                                    <a href="#" class='btn btn-default' title='Cambiar contraseña' data-rut="<?php echo $id; ?>" data-toggle="modal" data-target="#cambiar_clave"><i class="glyphicon glyphicon-cog"></i></a>
+                                    <a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminarUsuario('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
 
                         </tr>
                         <?php

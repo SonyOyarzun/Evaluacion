@@ -152,7 +152,7 @@ Class Usuario{
       $apellido     = $usuario->getApellido();
       $clave_hash   = $usuario->getClave();
       $email        = $usuario->getMail();
-      $tipo         = $usuario->getTipo_usuario();
+      $tipo         = $usuario->getTipo();
       $genero       = $usuario->getGenero();
       $departamento = $usuario->getDepartamento();
       $con          = Conexion::conectar();
@@ -160,10 +160,10 @@ Class Usuario{
       $fechaAgregado=date("Y-m-d H:i:s");
         
       $sql = "INSERT INTO usuario " 
-           . " (id_usuario, nombre_usuario, apellido_usuario , clave_usuario, mail_usuario, fecha_agregado, tipo_usuario , genero_usuario, departamento_usuario) "
-           . " VALUES('".$rut."','".$nombre."','".$apellido."','" . $clave_hash . "', '" . $email . "', '" . $fechaAgregado . "','".$tipo."' ,'".$genero."','".$departamento."')";
+           . " (id_usuario, nombre_usuario, apellido_usuario , clave_usuario, mail_usuario, fecha_usuario, tipo_usuario , genero_usuario, departamento_usuario, estado_usuario) "
+           . " VALUES('".$rut."','".$nombre."','".$apellido."','" . $clave_hash . "', '" . $email . "', '" . $fechaAgregado . "','".$tipo."' ,'".$genero."','".$departamento."','1')";
       
-    //  print_r($sql);
+   //   print_r($sql);
         $result=mysqli_query($con,$sql);
         return $result;
     }
@@ -175,7 +175,7 @@ Class Usuario{
       $nombre       = $usuario->getNombre();
       $apellido     = $usuario->getApellido();
       $email        = $usuario->getMail();
-      $tipo         = $usuario->getTipo_usuario();
+      $tipo         = $usuario->getTipo();
       $genero       = $usuario->getGenero();
       $departamento = $usuario->getDepartamento();
       $con          = Conexion::conectar();
@@ -199,12 +199,12 @@ Class Usuario{
         return $result;
     }
     
-    function eliminarUsuario(Usuario $usuario){
+    function deshabilitarUsuario(Usuario $usuario){
         
         $id     = $usuario->getId();
         $con    = Conexion::conectar();
         
-        $sql="DELETE FROM usuario WHERE id_usuario='".$id."'";
+        $sql="UPDATE usuario SET estado_usuario = '2' WHERE id_usuario='".$id."'";
         $result=mysqli_query($con,$sql);
         return $result;
     }

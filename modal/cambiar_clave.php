@@ -1,6 +1,4 @@
-<?php
-if (isset($con)) {
-    ?>
+
     <!-- Modal -->
     <div class="modal fade" id="cambiar_clave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -36,6 +34,4 @@ if (isset($con)) {
             </div>
         </div>
     </div>
-    <?php
-}
-?>	
+	

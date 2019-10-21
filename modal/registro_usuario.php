@@ -11,9 +11,9 @@
                     <form class="form-horizontal" method="post" id="guardar_usuario" name="guardar_usuario">
                         <div id="resultados_ajax"></div>
                         <div class="form-group">
-                            <label for="rut" class="col-sm-3 control-label">Rut</label>
+                            <label for="id" class="col-sm-3 control-label">ID</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="rut" name="rut" placeholder="Rut" required maxlength="12" onkeyup="validar_rut(this.id)">
+                                <input type="text" class="form-control" id="id" name="id" placeholder="ID" required maxlength="12" onkeyup="validar_rut(this.id)">
                                 <small class="rut-error"></small>
                             </div>
                         </div>
@@ -70,16 +70,14 @@
                             <div class="col-sm-8">
                                 <select class='form-control' name='departamento' id='departamento' required>
                                     <option value="">Selecciona un Departamento</option>
-                                    <?php
-                                    /*
+                                    <?php                                  
                                     $departamento = new Departamento();
-                                    $departamento->setCon($con);
                                     $query_departamento = Departamento::recuperarDepartamento($departamento);
                                     while ($rw = mysqli_fetch_array($query_departamento)) {
                                         ?>
                                         <option value="<?php echo $rw['id_departamento']; ?>"><?php echo $rw['nombre_departamento']; ?></option>			
                                         <?php
-                                    }*/
+                                    }
                                     ?>
                                 </select>			  
                             </div>

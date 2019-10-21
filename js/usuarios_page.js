@@ -29,7 +29,7 @@ $('#editar_usuario').on('show.bs.modal', function (event) {
           modal.find('.modal-body #mod_tipo')           .val(tipo)
 	  modal.find('.modal-body #mod_departamento')   .val(departamento) 
           modal.find('.modal-body #mod_email')          .val(mail) 
-	  modal.find('.modal-body #mod_rut')            .val(id)
+	  modal.find('.modal-body #mod_id')             .val(id)
 	})      
 
 $('#cambiar_clave').on('show.bs.modal', function (event) {
@@ -37,7 +37,7 @@ $('#cambiar_clave').on('show.bs.modal', function (event) {
           var rut = button.data('rut') 
          
 	  var modal = $(this)
-	  modal.find('.modal-body #mod_clave_rut').val(rut)
+	  modal.find('.modal-body #mod_clave_id').val(rut)
 	}) 
 
 		
