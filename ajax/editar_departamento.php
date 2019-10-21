@@ -9,10 +9,9 @@
 			!empty($_POST['mod_id']) &&
 			!empty($_POST['mod_nombre'])
 		){
-		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
                 include '../Clases/Departamento.php';
+                $con = Conexion::conectar();
                 
 		$id_departamento=intval($_POST['mod_id']);
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["mod_nombre"],ENT_QUOTES)));
@@ -23,7 +22,6 @@
                 $departamento->setId($id_departamento);
                 $departamento->setNombre($nombre);
                 $departamento->setDescripcion($descripcion);
-                $departamento->setCon($con);
                 
 		$query_update = Departamento::editarDepartamento($departamento);
 			if ($query_update){

@@ -8,7 +8,8 @@
 
 	/* Connect To Database*/
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
-	
+	include './Clases/TipoEncuesta.php';
+        
 	$active_encuestas="active";
 	$title="Encuestas | Owl Evaluation";
 ?>

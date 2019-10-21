@@ -7,11 +7,10 @@ if (empty($_POST['nombre'])) {
 }elseif (empty($_POST['tipo_encuesta'])) {
     $errors[] = "Tipo vacío";    
 } else {
-    /* Connect To Database */
-    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     include '../Clases/Encuesta.php';
-
+    $con = Conexion::conectar();
+    
     $nombre = mysqli_real_escape_string($con, (strip_tags($_POST["nombre"], ENT_QUOTES)));
     $tipo_encuesta = intval($_POST["tipo_encuesta"]);
     $fecha_agregado = date("Y-m-d H:i:s");
@@ -19,8 +18,7 @@ if (empty($_POST['nombre'])) {
     $encuesta = new Encuesta();
     $encuesta->setNombre($nombre);
     $encuesta->setTipo($tipo_encuesta);
-    $encuesta->setCon($con);
-    
+
     $query_encuesta = Encuesta::registrarEncuesta($encuesta);
 
     if ($query_encuesta) {

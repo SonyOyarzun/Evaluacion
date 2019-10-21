@@ -82,15 +82,16 @@ Class Departamento{
           
       $nombre       = $departamento->getNombre();
       $descripcion  = $departamento->getDescripcion();
-      $con          = $departamento->getCon();
+      $con          = Conexion::conectar();       
               
       $fecha_agregado=date("Y-m-d H:i:s");
      
       $sql=" INSERT INTO departamento "
-          ." (nombre_departamento, descripcion_departamento,fecha_agregado) "
+          ." (nombre_departamento, descripcion_departamento,fecha_departamento) "
           ." VALUES ('$nombre','$descripcion','$fecha_agregado') "; 
      
         $result=mysqli_query($con,$sql);
+     //   print_r($sql);
         return $result;
     }
     
@@ -100,7 +101,7 @@ Class Departamento{
         $id_departamento    = $departamento->getId();
         $nombre             = $departamento->getNombre();
         $descripcion        = $departamento->getDescripcion();
-        $con                = $departamento->getCon();
+        $con                = Conexion::conectar();       
          
         $sql=" UPDATE departamento "
             ." SET nombre_departamento='".$nombre."', descripcion_departamento='".$descripcion."' "
@@ -112,7 +113,7 @@ Class Departamento{
     function eliminarDepartamento(Departamento $departamento){
         
         $id_departamento    = $departamento->getId();
-        $con                = $departamento->getCon();
+        $con                = Conexion::conectar();       
         
         $sql="DELETE FROM departamento WHERE id_departamento='".$id_departamento."'";
         $result=mysqli_query($con,$sql);

@@ -23,21 +23,21 @@ class TipoEncuesta {
 
  
   // metodos
-    function recuperarTipoEncuesta(TipoEncuesta $tipo_encuesta) {
+    function recuperarTipoEncuesta() {
 
-        $con = $tipo_encuesta->getCon();
+        $con = Conexion::conectar();
         
-        $sSelect = " SELECT id_tipo,nombre_tipo";
-        $sTable  = " FROM  tipoencuesta ";
+        $sSelect = " SELECT id_tipo_encuesta,nombre_tipo_encuesta";
+        $sTable  = " FROM  tipo_encuesta ";
         $sWhere  = "";
  
        
-        $sWhere.=" order by id_tipo ";
+        $sWhere.=" order by id_tipo_encuesta ";
         
 
         $sql = " $sSelect $sTable $sWhere ";
-
         $result = mysqli_query($con, $sql);
+   //     print_r($sql);
         return $result;
     }
 

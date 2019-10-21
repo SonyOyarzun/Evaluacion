@@ -11,8 +11,7 @@ if (isset($_GET['id'])) {
     
     $encuesta = new Encuesta();
     $encuesta->setId($id_encuesta);
-    $encuesta->setCon($con);
-    
+
     if ($delete = Encuesta::eliminarEncuesta($encuesta)) {
         ?>
         <div class="alert alert-success alert-dismissible" role="alert">
@@ -75,7 +74,7 @@ if ($action == 'ajax') {
             ?>
 
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 thumb text-center ng-scope" ng-repeat="item in records">
-                <a class="thumbnail" href="pregunta.php?id_encuesta=<?php echo $id_encuesta; ?>&tipo_encuesta=<?php echo $id_tipo; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>">
+                <a class="thumbnail" href="preguntas.php?id_encuesta=<?php echo $id_encuesta; ?>&tipo_encuesta=<?php echo $id_tipo; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>">
 
                     <img class="img-responsive" src="img/encuesta.png" alt="<?php echo $comentario_encuesta; ?>">
 

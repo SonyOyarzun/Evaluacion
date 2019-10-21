@@ -4,24 +4,23 @@
 	if (empty($_POST['nombre'])) {
            $errors[] = "Nombre vacío";
         } else if (!empty($_POST['nombre'])){
-		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+
 		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
                 include '../Clases/Departamento.php';
-	
+	        $con = Conexion::conectar();
+                
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
 		$descripcion=mysqli_real_escape_string($con,(strip_tags($_POST["descripcion"],ENT_QUOTES)));
 		
                 $departamento = new Departamento();
                 $departamento->setNombre($nombre);
                 $departamento->setDescripcion($descripcion);
-                $departamento->setCon($con);
-                
+
 		$query_new_insert = Departamento::registrarDepartamento($departamento);
 			if ($query_new_insert){
 				$messages[] = "Departamento ha sido ingresada satisfactoriamente.";
 			} else{
-				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
+				$errors []= "El nombre del departamento ya existe.".mysqli_error($con);
 			}
 		} else {
 			$errors []= "Error desconocido.";

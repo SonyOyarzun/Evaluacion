@@ -10,7 +10,7 @@ Class Encuesta{
     private $fecha;
     
     //cada cuanto tiempo se realizan evaluaciones en meses
-    private $reglaevaluacion='1';   
+    private $reglaevaluacion;   
     private $condicion;
  
     function getId() {
@@ -105,8 +105,8 @@ Class Encuesta{
        $con             = Conexion::conectar();  
        $fecha_agregado=date("Y-m-d H:i:s");
      
-       $sql="INSERT INTO encuesta (nombre_encuesta,tipo_encuesta, fecha_agregado)"
-              . " VALUES ('$nombre','$tipo_encuesta','$fecha_agregado')";
+       $sql="INSERT INTO encuesta (nombre_encuesta,tipo_encuesta, fecha_encuesta, estado_encuesta)"
+              . " VALUES ('$nombre','$tipo_encuesta','$fecha_agregado','1')";
      
         $result=mysqli_query($con,$sql);
         return $result;

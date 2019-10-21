@@ -64,7 +64,7 @@ Class Pregunta{
     function recuperarPregunta(Pregunta $pregunta) {
 
         $id_pregunta = $pregunta->getId();
-        $id_encuesta = $pregunta->getId_encuesta();
+        $id_encuesta = $pregunta->getEncuesta();
         $condicion   = $pregunta->getCondicion();
         $offset      = $pregunta->getOffset();
         $per_page    = $pregunta->getPer_page();
