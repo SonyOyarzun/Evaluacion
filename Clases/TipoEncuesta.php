@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/Evaluacion/config/conexion.php');
 
 class TipoEncuesta {
  private $id_tipo;

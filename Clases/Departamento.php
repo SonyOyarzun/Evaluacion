@@ -1,18 +1,15 @@
 <?php
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/Evaluacion/config/conexion.php');
 
 Class Departamento{
     
     private $id;
     private $nombre;
     private $descripcion;
-    private $fecha_agregado;
+    private $fecha;
     
     private $condicion;
-    private $offset;
-    private $per_page;
-    private $con;
-    
+
     function getId() {
         return $this->id;
     }
@@ -25,24 +22,12 @@ Class Departamento{
         return $this->descripcion;
     }
 
-    function getFecha_agregado() {
-        return $this->fecha_agregado;
+    function getFecha() {
+        return $this->fecha;
     }
 
     function getCondicion() {
         return $this->condicion;
-    }
-
-    function getOffset() {
-        return $this->offset;
-    }
-
-    function getPer_page() {
-        return $this->per_page;
-    }
-
-    function getCon() {
-        return $this->con;
     }
 
     function setId($id) {
@@ -57,35 +42,23 @@ Class Departamento{
         $this->descripcion = $descripcion;
     }
 
-    function setFecha_agregado($fecha_agregado) {
-        $this->fecha_agregado = $fecha_agregado;
+    function setFecha($fecha) {
+        $this->fecha = $fecha;
     }
 
     function setCondicion($condicion) {
         $this->condicion = $condicion;
     }
 
-    function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    function setPer_page($per_page) {
-        $this->per_page = $per_page;
-    }
-
-    function setCon($con) {
-        $this->con = $con;
-    }
-
+        
     
      // metodos
     function recuperarDepartamento(Departamento $departamento) {
 
         $id_departamento = $departamento->getId();
         $condicion       = $departamento->getCondicion();
-        $offset          = $departamento->getOffset();
-        $per_page        = $departamento->getPer_page();
-        $con             = $departamento->getCon();        
+
+        $con             = Conexion::conectar();       
         
         $sTable = " departamento ";
         $sWhere = "";
@@ -98,10 +71,6 @@ Class Departamento{
            $sWhere .= " WHERE id_departamento='".$id_departamento."' " ;
         }
         $sWhere.=" order by nombre_departamento";
-        
-         if (($offset!="")&&($per_page!="")){
-           $sWhere .= " LIMIT $offset,$per_page ";
-        }
 
         $sql = " SELECT * FROM  $sTable $sWhere ";
 

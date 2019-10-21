@@ -1,9 +1,9 @@
 <?php
 include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
 /* Connect To Database */
-require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
 require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
 include '../Clases/Departamento.php';
+$con = Conexion::conectar(); 
 
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 if (isset($_GET['id'])) {
@@ -11,8 +11,7 @@ if (isset($_GET['id'])) {
     
     $departamento = new Departamento();
     $departamento->setId($id_departamento);
-    $departamento->setCon($con);
-    
+
     $query = Departamento::recuperarDepartamento($departamento);
     
     $count = mysqli_num_rows($query);
@@ -57,26 +56,12 @@ if ($action == 'ajax') {
         $sWhere .= ')';
     }
 
-    include 'pagination.php'; //include pagination file
-    //pagination variables
-    $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
-    $per_page = 10; //how much records you want to show
-    $adjacents = 4; //gap between pages after number of adjacents
-    $offset = ($page - 1) * $per_page;
-
-    $departamento = new Departamento();   
-    
+    $departamento = new Departamento();      
     $departamento->setCondicion($sWhere);
-    $departamento->setOffset($offset);  
-    $departamento->setPer_page($per_page);  
-    $departamento->setCon($con);  
-            
+        
     $result = Departamento::recuperarDepartamento($departamento);
     $numrows = mysqli_num_rows($result);
-    $total_pages = ceil($numrows / $per_page);
-    $reload = './clientes.php';
-
-    
+   
     if ($numrows > 0) {
         ?>
         <div class="table-responsive">
@@ -93,7 +78,7 @@ if ($action == 'ajax') {
             $id_departamento = $row['id_departamento'];
             $nombre_departamento = $row['nombre_departamento'];
             $descripcion_departamento = $row['descripcion_departamento'];
-            $fecha_agregado = date('d/m/Y', strtotime($row['fecha_agregado']));
+            $fecha_agregado = date('d/m/Y', strtotime($row['fecha_departamento']));
             ?>
                     <tr>
 
@@ -110,12 +95,6 @@ if ($action == 'ajax') {
             <?php
         }
         ?>
-                <tr>
-                    <td colspan=4><span class="pull-right">
-        <?php
-        echo paginate($reload, $page, $total_pages, $adjacents);
-        ?></span></td>
-                </tr>
             </table>
         </div>
                 <?php
