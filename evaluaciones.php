@@ -33,12 +33,22 @@ $usuario = new Usuario();
 $usuario->setId($id_usuario);
 
 $recuperar_Asignacion = Encuesta::recuperarEncuestaAsignada($usuario);
-$verificacion = mysqli_fetch_array($recuperar_Asignacion);
+
+$valida=false;
 //valida que la encuesta por url sea la asignada
-if ($id_encuesta != $verificacion['id_encuesta']) {
-    header("location: notificaciones.php");
-}
-//      print_r($verificacion);
+
+ while ($row = mysqli_fetch_array($recuperar_Asignacion)) {
+    if ($id_encuesta == $row['id_encuesta']) {
+     $valida = true;
+    }    
+ }
+
+if($valida==false){
+ header("location: notificaciones.php");   
+} 
+
+ 
+  //    print_r($verificacion);
 ?>
 
 

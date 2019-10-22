@@ -12,7 +12,6 @@
                     $usuario = new Usuario();
                     $usuario ->setId($id_usuario);
 
-                    
                     $result = Encuesta::recuperarEncuestaAsignada($usuario);
                     $notificaciones = mysqli_num_rows($result);
     

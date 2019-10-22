@@ -6,7 +6,7 @@ Class Encuesta{
     private $id;
     private $nombre;
     private $tipo;
-    private $asignnacion;
+    private $asignacion;
     private $fecha;
     
     //cada cuanto tiempo se realizan evaluaciones en meses
@@ -25,8 +25,8 @@ Class Encuesta{
         return $this->tipo;
     }
 
-    function getAsignnacion() {
-        return $this->asignnacion;
+    function getAsignacion() {
+        return $this->asignacion;
     }
 
     function getFecha() {
@@ -53,8 +53,8 @@ Class Encuesta{
         $this->tipo = $tipo;
     }
 
-    function setAsignnacion($asignnacion) {
-        $this->asignnacion = $asignnacion;
+    function setAsignacion($asignacion) {
+        $this->asignacion = $asignacion;
     }
 
     function setFecha($fecha) {
@@ -69,6 +69,7 @@ Class Encuesta{
         $this->condicion = $condicion;
     }
 
+    
     
         
      // metodos
@@ -196,7 +197,7 @@ Class Encuesta{
    
         $sql = " $sSelect  $sTable $sWhere ";
 
-    //    print_r($sql);
+   //     print_r($sql);
         $result = mysqli_query($con, $sql);     
         return $result;
     }
