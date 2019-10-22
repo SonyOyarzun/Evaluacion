@@ -47,7 +47,7 @@ if ($action == 'ajax') {
     $sWhere .= ')';
 
     if (($fecha_inicio && $fecha_termino) != "") {
-        $sWhere .= " AND fecha_agregado BETWEEN '$fecha_inicio' AND '$fecha_termino' ";
+        $sWhere .= " AND fecha_encuesta BETWEEN '$fecha_inicio' AND '$fecha_termino' ";
     }
 
     $encuesta = new Encuesta();

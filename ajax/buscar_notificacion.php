@@ -31,7 +31,7 @@ if ($action == 'ajax') {
     $sWhere .= ')';
 
     if (($fecha_inicio && $fecha_termino) != "") {
-        $sWhere .= " AND usuarioencuesta.fecha_agregado BETWEEN '$fecha_inicio' AND '$fecha_termino' ";
+        $sWhere .= " AND usuario_encuesta.fecha_usuario_encuesta BETWEEN '$fecha_inicio' AND '$fecha_termino' ";
     }
 
     $usuario = new Usuario();

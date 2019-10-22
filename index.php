@@ -7,9 +7,9 @@ https://code.tutsplus.com/es/tutorials/getting-started-with-chartjs-line-and-bar
 
 limpiar BD
 TRUNCATE `calificacion`;
-TRUNCATE `comentariofinal`;
+TRUNCATE `comentario_general`;
 TRUNCATE `historial`;
-TRUNCATE `usuarioencuesta`;
+TRUNCATE `usuario_encuesta`;
 */
 
 /*
@@ -22,22 +22,17 @@ logradas
 7.ver avances por periodo(asignacion=usuario pero distinta fecha)
 8.citar por mail en historial
 9.cargando al asignar,mientras manda correos
-
+10.ordenar y limpiar codigo (cambiar * en select)
 12.revisar los select y reemplazar por metodos.
 13.revisar buscar y poner el metodo recuperar en una variable
 14.revisar los page.js
+15.cambuar id_usuario por rut usuario/evaluado evaluador historial
+16.revisar completar encuesta se cambie estado
 
 pendientes
-10.ordenar y limpiar codigo (cambiar * en select)
-15.cambuar id_usuario por rut usuario/evaluado evaluador historial
 6.tarea programada - cambiar estado de encuesta pasado un tiempo(cron job o myslq)
-
-
-
-
-
 11.no se deberia asignar una encuesta sin preguntas
-15.revisar completar encuesta secambie estado
+
 
 
 */
