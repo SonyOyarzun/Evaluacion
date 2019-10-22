@@ -136,14 +136,14 @@ class Historial {
 
     function recuperarHistorial(Historial $historial) {
         
-       $id_encuesta = $historial->getId_encuesta();
+       $id_encuesta = $historial->getEncuesta();
        $condicion   = $historial->getCondicion();
        $con         = Conexion::conectar();
 
-       $sSelect = " SELECT historial.id_asignacion, usuario.nombre_usuario,usuario.apellido_usuario,historial.id_evaluado, historial.id_usuario, historial.fecha_agregado, tipo.nombre_tipo ";
-       $sTable  = " FROM historial,usuario,tipo ";
+       $sSelect = " SELECT historial.id_usuario_encuesta, usuario.nombre_usuario,usuario.apellido_usuario,historial.id_evaluado, historial.id_usuario, historial.fecha_historial, tipo_encuesta.nombre_tipo_encuesta ";
+       $sTable  = " FROM historial,usuario,tipo_encuesta ";
        $sWhere  = " WHERE historial.id_evaluado=usuario.id_usuario "
-                . " AND usuario.tipo_usuario = tipo.id_tipo ";
+                . " AND usuario.tipo_usuario = tipo_encuesta.id_tipo_encuesta ";
            
        
       
@@ -155,11 +155,12 @@ class Historial {
         if ($id_encuesta!=""){ 
           $sWhere.= " AND historial.id_encuesta='$id_encuesta' ";
         }
-        $sWhere.=" ORDER BY historial.id_asignacion,historial.fecha_agregado desc ";
+        $sWhere.=" ORDER BY historial.id_usuario_encuesta,historial.fecha_historial desc ";
 
         $sql = " $sSelect  $sTable $sWhere ";
 
         $result = mysqli_query($con, $sql);
+      //  print_r($sql);
         return $result;
     }
 

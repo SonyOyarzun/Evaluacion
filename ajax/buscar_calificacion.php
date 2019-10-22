@@ -5,6 +5,9 @@ require_once ("../config/conexion.php"); //Contiene funcion que conecta a la bas
 include '../Clases/Historial.php';
 include '../Clases/Calificacion.php';
 include '../Clases/Encuesta.php';
+
+$con = Conexion::conectar();
+
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 
 
@@ -42,7 +45,7 @@ if ($action == 'ajax') {
         }
     
         $historial = new Historial();
-        $historial->setId_encuesta($id_encuesta);
+        $historial->setEncuesta($id_encuesta);
         $historial->setCondicion($sWhere);
      
         
@@ -75,8 +78,8 @@ if ($action == 'ajax') {
                 $nom_evaluado = $row['nombre_usuario'];
                 $ape_evaluado = $row['apellido_usuario'];
                 $id_evaluador = $row['id_usuario'];
-                $cargo = $row['nombre_tipo'];
-                $fecha = $row['fecha_agregado'];
+                $cargo = $row['nombre_tipo_encuesta'];
+                $fecha = $row['fecha_historial'];
 
                 //obtener datos evaluador  
                 $sSelect = " SELECT usuario.nombre_usuario,usuario.apellido_usuario, tipo.nombre_tipo ";
