@@ -8,7 +8,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 }
 
 // incluye la la coneccion a BD
-require_once("config/db.php");
+require_once("./config/conexion.php");
+$con = Conexion::conectar();
 
 // Abre la  clase login en donde se crearan las variables de session
 require_once("./Autenticacion/Login.php");
@@ -30,9 +31,9 @@ if ($login->isUserLoggedIn() == true) {
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title> Owl Evaluation | Login </title>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- CSS  -->
+  <?php 
+      include './head.php';
+  ?>
         <link href="css/login.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
@@ -81,10 +82,10 @@ if ($login->isUserLoggedIn() == true) {
         </div><!-- /card-container -->
     </div><!-- /container -->
   </body><?php
-	include("footer.php");
+	include("./footer.php");
 	?>
   
-  <script type="text/javascript" src="js/extras/validarRut.js"></script>
+  <script type="text/javascript" src="./js/extras/validarRut.js"></script>
 </html>
 
 	<?php
