@@ -1,12 +1,12 @@
 <?php
-
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
-	/* Connect To Database*/
-	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
         include '../Mail/email.php';
         include '../Clases/Usuario.php';
 
+        $con = Conexion::conectar();
+        
       $action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 
       $id_evaluado=$_POST['rut'];
@@ -19,8 +19,7 @@
       $imagen=$_POST['imagen'];
       
       $usuario = new Usuario();
-      $usuario->setRut($id_evaluado);
-      $usuario->setCon($con);
+      $usuario->setId($id_evaluado);
       
       $query= Usuario::recuperarUsuario($usuario);
       $rw_user=mysqli_fetch_array($query);
