@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/Evaluacion/config/conexion.php');
 
 class Calificacion {
-   private $id;
+   private $pregunta;
    private $comentario;
    private $nota;
    private $usuario;
@@ -11,8 +11,8 @@ class Calificacion {
     
    private $condicion;
 
-   function getId() {
-       return $this->id;
+   function getPregunta() {
+       return $this->pregunta;
    }
 
    function getComentario() {
@@ -39,8 +39,8 @@ class Calificacion {
        return $this->condicion;
    }
 
-   function setId($id) {
-       $this->id = $id;
+   function setPregunta($pregunta) {
+       $this->pregunta = $pregunta;
    }
 
    function setComentario($comentario) {
@@ -70,7 +70,7 @@ class Calificacion {
          
       function registrarCalificacion(Calificacion $calificacion){
       
-      $id_pregunta   = $calificacion->getId();
+      $id_pregunta   = $calificacion->getPregunta();
       $id_usuario    = $calificacion->getUsuario();
       $id_evaluado   = $calificacion->getEvaluado();
       $notas         = $calificacion->getNota();

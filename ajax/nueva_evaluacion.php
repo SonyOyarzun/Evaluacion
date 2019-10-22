@@ -40,7 +40,7 @@ if (empty($_POST['id_pregunta'])) {
         $notas = intval($_POST['calificacion' . $indice]);
 
         $calificacion = new Calificacion();
-        $calificacion->setId($pregunta[$indice]);
+        $calificacion->setPregunta($pregunta[$indice]);
         $calificacion->setUsuario($id_usuario);
         $calificacion->setEvaluado($id_evaluado);
         $calificacion->setNota($notas);
