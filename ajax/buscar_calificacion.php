@@ -5,6 +5,7 @@ require_once ("../config/conexion.php"); //Contiene funcion que conecta a la bas
 include '../Clases/Historial.php';
 include '../Clases/Calificacion.php';
 include '../Clases/Encuesta.php';
+include '../Clases/Usuario.php';
 
 $con = Conexion::conectar();
 
@@ -39,7 +40,7 @@ if ($action == 'ajax') {
 
 
             if (($fecha_inicio && $fecha_termino) != "") {
-                $sWhere .= " AND historial.fecha_agregado BETWEEN '$fecha_inicio' "
+                $sWhere .= " AND historial.fecha_historial BETWEEN '$fecha_inicio' "
                         . " AND '$fecha_termino' ";
             }
         }
@@ -82,18 +83,15 @@ if ($action == 'ajax') {
                 $fecha = $row['fecha_historial'];
 
                 //obtener datos evaluador  
-                $sSelect = " SELECT usuario.nombre_usuario,usuario.apellido_usuario, tipo.nombre_tipo ";
-                $sTable = " FROM usuario,tipo ";
-                $sWhere = " WHERE usuario.tipo_usuario = tipo.id_tipo "
-                        . " AND usuario.id_usuario='$id_evaluador' ";
-
-                $sql = " $sSelect $sTable $sWhere ";
-                $recuperar_evaluador = mysqli_query($con, $sql);
+                $usuario = new Usuario();
+                $usuario->setId($id_evaluador);
+   
+                $recuperar_evaluador = Usuario::recuperarUsuario($usuario);
                 $cargo_evaluador = "";
                 $nombre_evaluador = "";
                 $apellido_evaluador = "";
                 while ($row = mysqli_fetch_array($recuperar_evaluador)) {
-                    $cargo_evaluador = $row['nombre_tipo'];
+                    $cargo_evaluador = $row['nombre_tipo_usuario'];
                     $nombre_evaluador = $row['nombre_usuario'];
                     $apellido_evaluador = $row['apellido_usuario'];
                 }
