@@ -125,9 +125,8 @@ if ($action == 'ajax') {
                             $id_evaluado = mysqli_real_escape_string($con, (strip_tags($_REQUEST['id_evaluado'], ENT_QUOTES)));
 
                             $calificacion = new Calificacion();
-                            $calificacion->setId_evaluado($id_evaluado);
-                            $calificacion->setCon($con);
-                            
+                            $calificacion->setEvaluado($id_evaluado);
+                        
                             $encuesta = new Encuesta();
                             $encuesta->setId($id_enc);
                             
@@ -136,7 +135,7 @@ if ($action == 'ajax') {
                             $i = 0;
                             while ($row = mysqli_fetch_array($query)) {
 
-                                $json[$i] = $row['avg(calificacion_nota)'];
+                                $json[$i] = $row['avg(nota_calificacion)'];
                                 $json2[$i] = $row['nombre_pregunta'];
                                 $i++;
                             }
@@ -152,16 +151,15 @@ if ($action == 'ajax') {
                             $fecha = mysqli_real_escape_string($con, (strip_tags($_REQUEST['fecha'], ENT_QUOTES)));
 
                             $historial = new Historial();
-                            $historial->setId_usuario($id_evaluador);
-                            $historial->setId_evaluado($id_evaluado);
-                            $historial->setFecha_agregado($fecha);
-                            $historial->setCon($con);
-                            
+                            $historial->setUsuario($id_evaluador);
+                            $historial->setEvaluado($id_evaluado);
+                            $historial->setFecha($fecha);
+
                             $query = Historial::recuperarDetallePorFecha($historial);
 
                             $i = 0;
                             while ($row = mysqli_fetch_array($query)) {
-                                $json_notas[$i]         = $row['calificacion_nota'];
+                                $json_notas[$i]         = $row['nota_calificacion'];
                                 $json_preguntas[$i]     = $row['nombre_pregunta'];
                                 $json_preg_descrip[$i]  = $row['descripcion_pregunta'];
                                 $json_preg_coment[$i]   = $row['comentario_calificacion'];
@@ -169,16 +167,15 @@ if ($action == 'ajax') {
                             }
 
                             $historial = new Historial();
-                            $historial->setId_evaluado($id_evaluado);
-                            $historial->setId_usuario($id_evaluador);
-                            $historial->setFecha_agregado($fecha);
-                            $historial->setCon($con);
-                            
+                            $historial->setEvaluado($id_evaluado);
+                            $historial->setUsuario($id_evaluador);
+                            $historial->setFecha($fecha);
+
                             $query = Historial::recuperarComentarioGeneral($historial);
 
                             $i = 0;
                             while ($row = mysqli_fetch_array($query)) {
-                                $json_com_gen[$i] = $row['comentario'];
+                                $json_com_gen[$i] = $row['descripcion_comentario_general'];
                                 $i++;
                             }
                             echo '[{"notas":'       . json_encode($json_notas) . ',';

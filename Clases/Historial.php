@@ -185,10 +185,10 @@ class Historial {
     function recuperarPromedio(Calificacion $calificacion, Encuesta $encuesta){
     
         $id_encuesta    = $encuesta    ->getId(); 
-        $id_evaluado    = $calificacion->getId_evaluado(); 
+        $id_evaluado    = $calificacion->getEvaluado(); 
         $con            = Conexion::conectar();
         
-       $sSelect = " SELECT avg(calificacion_nota),nombre_pregunta ";
+       $sSelect = " SELECT avg(nota_calificacion),nombre_pregunta ";
              $sTable  = " FROM historial,pregunta,calificacion ";
              $sWhere  = " WHERE historial.id_encuesta=pregunta.id_encuesta "
                       . " AND pregunta.id_pregunta=calificacion.id_pregunta "
@@ -206,12 +206,12 @@ class Historial {
 
     function recuperarDetallePorFecha(Historial $historial){
     
-        $id_usuario  = $historial->getId_usuario();
-        $id_evaluado = $historial->getId_evaluado();
-        $fecha       = $historial->getFecha_agregado();
+        $id_usuario  = $historial->getUsuario();
+        $id_evaluado = $historial->getEvaluado();
+        $fecha       = $historial->getFecha();
         $con         = Conexion::conectar();
                  
-        $sSelect = " SELECT calificacion_nota,comentario_calificacion,nombre_pregunta,descripcion_pregunta,historial.id_usuario,historial.id_evaluado,historial.fecha_agregado ";
+        $sSelect = " SELECT nota_calificacion,comentario_calificacion,nombre_pregunta,descripcion_pregunta,historial.id_usuario,historial.id_evaluado,historial.fecha_historial ";
              $sTable  = " FROM historial,pregunta,calificacion ";
              $sWhere  = " WHERE historial.id_encuesta=pregunta.id_encuesta  "
                       . " AND pregunta.id_pregunta=calificacion.id_pregunta  "
@@ -219,12 +219,12 @@ class Historial {
                       . " AND calificacion.id_evaluado=historial.id_evaluado "
                       . " AND historial.id_usuario='$id_usuario' "
                       . " AND historial.id_evaluado='$id_evaluado' "
-                      . " AND historial.fecha_agregado = '$fecha' "
+                      . " AND historial.fecha_historial = '$fecha' "
                       . " ORDER BY pregunta.id_pregunta ";
          
         $sql=" $sSelect $sTable $sWhere ";
      
-   //     print_r($sql);
+  //      print_r($sql);
         
         $result=mysqli_query($con,$sql);
         return $result;
@@ -232,18 +232,18 @@ class Historial {
 
      function recuperarComentarioGeneral(Historial $historial){
      
-        $id_usuario   = $historial->getId_usuario();
-        $id_evaluado  = $historial->getId_evaluado();
-        $fecha        = $historial->getFecha_agregado();
+        $id_usuario   = $historial->getUsuario();
+        $id_evaluado  = $historial->getEvaluado();
+        $fecha        = $historial->getFecha();
         $con          = Conexion::conectar();
                 
-          $sSelect = " SELECT comentariofinal.comentario ";
-            $sTable  = " FROM comentariofinal,historial ";
+          $sSelect = " SELECT comentario_general.descripcion_comentario_general ";
+            $sTable  = " FROM comentario_general, historial ";
             $sWhere  = " Where historial.id_usuario='$id_usuario' " 
                     . " AND historial.id_evaluado='$id_evaluado' "
-                    . " AND historial.fecha_agregado = '$fecha' "
-                    . " AND comentariofinal.id_encuesta=historial.id_encuesta "
-                    . " AND comentariofinal.fecha_agregado= historial.fecha_agregado ";
+                    . " AND historial.fecha_historial = '$fecha' "
+                    . " AND comentario_general.id_encuesta=historial.id_encuesta "
+                    . " AND comentario_general.fecha_comentario_general= historial.fecha_historial ";
             
         $sql=" $sSelect $sTable $sWhere ";
      

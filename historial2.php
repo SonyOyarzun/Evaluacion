@@ -89,15 +89,7 @@
 		<div class='outer_div'></div><!-- Carga los datos ajax -->
 				
 			</form>
-                  
-                    
-                    
-			
 		
-	
-			
-			
-			
   </div>
 </div>
 		 
