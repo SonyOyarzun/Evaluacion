@@ -67,6 +67,7 @@ if ($action == 'ajax') {
                         <th class="text-center">Evaluado</th>
                         <th class="text-center">Cargo Evaluado</th>
                         <th class="text-center">ID Evaluador</th>
+                        <th class="text-center">Evaluador</th>
                         <th class="text-center">Cargo Evaluador</th>
                         <th class="text-center">Fecha Evaluacion</th>
 
@@ -75,9 +76,7 @@ if ($action == 'ajax') {
             <?php
             while ($row = mysqli_fetch_array($query)) {
 
-                $id_evaluado = $row['id_evaluado'];
-                $nom_evaluado = $row['nombre_usuario'];
-                $ape_evaluado = $row['apellido_usuario'];
+                $id_evaluado  = $row['id_evaluado'];
                 $id_evaluador = $row['id_usuario'];
                 $cargo = $row['nombre_tipo_encuesta'];
                 $fecha = $row['fecha_historial'];
@@ -95,14 +94,28 @@ if ($action == 'ajax') {
                     $nombre_evaluador = $row['nombre_usuario'];
                     $apellido_evaluador = $row['apellido_usuario'];
                 }
+                  //obtener datos evaluado  
+                $usuario = new Usuario();
+                $usuario->setId($id_evaluado);
+                
+                $recuperar_evaluado = Usuario::recuperarUsuario($usuario);
+                $cargo_evaluado = "";
+                $nombre_evaluado = "";
+                $apellido_evaluado = "";
+                while ($row = mysqli_fetch_array($recuperar_evaluado)) {
+                    $cargo_evaluado = $row['nombre_tipo_usuario'];
+                    $nombre_evaluado = $row['nombre_usuario'];
+                    $apellido_evaluado = $row['apellido_usuario'];
+                }
                 ?>
                         <tr>
                             <td class='bg-warning'><h5><?php echo $id_evaluado; ?></h4></td>
-                            <td class='bg-warning'><h5><a data-toggle="modal" href="#detalle_evaluacion" data-id="<?php echo $id_evaluado; ?>" data-nombre="<?php echo $nom_evaluado; ?>" data-apellido="<?php echo $ape_evaluado; ?>" data-encuesta="<?php echo $_GET['id_encuesta']; ?>"><?php echo $nom_evaluado . " " . $ape_evaluado; ?></a></h4></td>
+                            <td class='bg-warning'><h5><a data-toggle="modal" href="#detalle_evaluacion" data-id="<?php echo $id_evaluado; ?>" data-nombre="<?php echo $nombre_evaluado; ?>" data-apellido="<?php echo $apellido_evaluado; ?>" data-encuesta="<?php echo $_GET['id_encuesta']; ?>"><?php echo $nombre_evaluado . " " . $apellido_evaluado; ?></a></h4></td>
                             <th class='bg-warning'><h5><?php echo $cargo; ?></h4></th>
+                            <td><h5><?php echo $id_evaluador; ?></h4></td>
                             <td><h5><?php echo $nombre_evaluador . " " . $apellido_evaluador ?></h4></td>
                             <th><h5><?php echo $cargo_evaluador; ?></h4></th>
-                            <td  class='bg-warning'><a data-toggle="modal" href="#detalle_fecha_ev" data-id="<?php echo $id_evaluado; ?>" data-nombre="<?php echo $nom_evaluado; ?>" data-apellido="<?php echo $ape_evaluado; ?>" data-id_evaluador="<?php echo $id_evaluador; ?>" data-nomb_evaluador="<?php echo $nombre_evaluador . " " . $apellido_evaluador; ?>" data-fecha="<?php echo $fecha; ?>"><h5><?php echo $fecha; ?></h4></a></td>
+                            <td  class='bg-warning'><a data-toggle="modal" href="#detalle_fecha_ev" data-id="<?php echo $id_evaluado; ?>" data-nombre="<?php echo $nombre_evaluado; ?>" data-apellido="<?php echo $apellido_evaluado; ?>" data-id_evaluador="<?php echo $id_evaluador; ?>" data-nomb_evaluador="<?php echo $nombre_evaluador . " " . $apellido_evaluador; ?>" data-fecha="<?php echo $fecha; ?>"><h5><?php echo $fecha; ?></h4></a></td>
 
                             <td>
 

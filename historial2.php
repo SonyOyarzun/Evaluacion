@@ -20,11 +20,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php include("head.php");?>
+    <?php include("./head.php");?>
   </head>
   <body>
 	<?php
-	include("navbar.php");
+	include("./navbar.php");
    
     //validar privilegios
         if($tipo_usuario>2){
@@ -96,21 +96,21 @@
 	</div>
 	<hr>
 	<?php
-	include("footer.php");
+	include("./footer.php");
 	?>
         
          <!-- el select proviene de js -->
-         <script type="text/javascript" src="js/funciones/evaluacion.js"></script>
-         <script type="text/javascript" src="js/calificacion_page.js"></script>
+         <script type="text/javascript" src="./js/funciones/evaluacion.js"></script>
+         <script type="text/javascript" src="./js/calificacion_page.js"></script>
     
          <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-         <script type="text/javascript" src="js/extras/graficoBarra.js"></script>
+         <script type="text/javascript" src="./js/extras/graficoBarra.js"></script>
               <script>
               grafico(1)
               grafico(2)
              </script>  
-             <script type="text/javascript" src="js/extras/enviarMail.js"></script>
+             <script type="text/javascript" src="./js/extras/enviarMail.js"></script>
  
   </body>
 </html>

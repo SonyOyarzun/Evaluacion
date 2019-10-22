@@ -37,7 +37,7 @@ if ($action == 'ajax') {
         ; ?></strong></td>
                         <td colspan="3" style="text-align: center"><strong class="form-control">A Evaluar</strong></td>
                         <td colspan="1" style="text-align: center">
-                            <select id="t_evaluar" name="t_evaluar" class="form-control">
+                            <select id="t_evaluar" name="t_evaluar" class="form-control" required>
                                 <?php
                                 
                                 $historial = new Historial();

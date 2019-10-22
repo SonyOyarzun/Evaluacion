@@ -207,7 +207,7 @@ Class Encuesta{
           $id_asignacion = $encuesta->getAsignacion();
           $con           = Conexion::conectar();
         
-          $sql= " UPDATE usuarioencuesta SET estado= 2 WHERE id_asignacion='$id_asignacion'";
+          $sql= " UPDATE usuario_encuesta SET estado_usuario_encuesta= 2 WHERE id_usuario_encuesta='$id_asignacion'";
           $result = mysqli_query($con, $sql);
           return $result;
     }

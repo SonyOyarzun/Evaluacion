@@ -4,6 +4,8 @@ include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a
 /* Inicia validacion del lado del servidor */
 if (empty($_POST['id_pregunta'])) {
     $errors[] = "No ha seleccionado preguntas";
+}else if (empty($_POST["t_evaluar"])) {
+    $errors[] = "No ha seleccionado trabajador a evaluar";    
 } else {
 
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
@@ -63,7 +65,7 @@ if (empty($_POST['id_pregunta'])) {
         $comprobar = Calificacion::registrarComentarioGeneral($calificacion, $encuesta);
 
         if ($comprobar) {
-            $messages[] = "El comentario se ha ingresado satisfactoriamente ";
+     //       $messages[] = "El comentario se ha ingresado satisfactoriamente ";
 
             //historial
 
@@ -78,7 +80,7 @@ if (empty($_POST['id_pregunta'])) {
             $comprobar = Historial::registrarHistorial($historial);
 
             if ($comprobar) {
-                $messages[] = "El historial se ha registrado satisfactoriamente ";
+          //      $messages[] = "El historial se ha registrado satisfactoriamente ";
 
                 //verificar cuantos usuarios quedan a evaluar, si es 0 se da por terminada la encuesta
 
@@ -93,7 +95,7 @@ if (empty($_POST['id_pregunta'])) {
 
                 $query = Usuario::verificarUsuarioPorEvaluar($historial, $departamento, $encuesta);
                 $count = mysqli_num_rows($query);
-                //              print_r("contador :".$count." tipo: ".$tipo_encuesta." departamento".$id_departamento." asignacion".$id_asignacion);
+       //         print_r("contador :".$count." tipo: ".$tipo_encuesta." departamento".$id_departamento." asignacion".$id_asignacion);
 
                 if ($count == 0) {
 
@@ -105,7 +107,7 @@ if (empty($_POST['id_pregunta'])) {
                     $comprobar = Encuesta::encuestaCompletada($encuesta);
 
                     if ($comprobar) {
-                        $messages[] = "Encuesta asignada completada exitosamente ";
+                        $messages[] = "Usted ha evaluado a todo su equipo";
                     } else {
 
                         $errors[] = "Lo sentimos , la encuesta no se ha completado por alguna razon.";
@@ -153,7 +155,6 @@ if (isset($errors)) {
         <?php
     }
 
-//volver
     ?>
-<!--     <meta http-equiv="refresh" content="1; url=notificaciones.php"> -->
+
 

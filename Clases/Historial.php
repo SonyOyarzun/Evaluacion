@@ -140,14 +140,10 @@ class Historial {
        $condicion   = $historial->getCondicion();
        $con         = Conexion::conectar();
 
-       $sSelect = " SELECT historial.id_usuario_encuesta, usuario.nombre_usuario,usuario.apellido_usuario,historial.id_evaluado, historial.id_usuario, historial.fecha_historial, tipo_encuesta.nombre_tipo_encuesta ";
-       $sTable  = " FROM historial,usuario,tipo_encuesta ";
-       $sWhere  = " WHERE historial.id_evaluado=usuario.id_usuario "
-                . " AND usuario.tipo_usuario = tipo_encuesta.id_tipo_encuesta ";
-           
-       
-      
-   
+       $sSelect = " SELECT historial.id_usuario_encuesta,historial.id_evaluado, historial.id_usuario, historial.fecha_historial, tipo_encuesta.nombre_tipo_encuesta ";
+       $sTable  = " FROM historial,tipo_encuesta ";
+       $sWhere  = " WHERE tipo_encuesta = id_tipo_encuesta ";
+ 
         if ($condicion!=""){
            $sWhere .= $condicion;
         }
@@ -160,7 +156,7 @@ class Historial {
         $sql = " $sSelect  $sTable $sWhere ";
 
         $result = mysqli_query($con, $sql);
-      //  print_r($sql);
+   //     print_r($sql);
         return $result;
     }
 
@@ -179,7 +175,7 @@ class Historial {
       $sql="INSERT INTO historial (id_usuario_encuesta ,id_encuesta,id_usuario,id_evaluado,nombre_encuesta,tipo_encuesta,fecha_historial,estado_usuario_encuesta) "
                         . "VALUES ('$id_asignacion','$id_encuesta','$id_usuario','$id_evaluado','$nombre_encuesta','$tipo_encuesta','$fecha_agregado','2')";  
       
-      print_r($sql);
+ //     print_r($sql);
       $result=mysqli_query($con,$sql);
       return $result;
     }
