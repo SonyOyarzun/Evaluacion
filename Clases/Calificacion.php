@@ -70,36 +70,38 @@ class Calificacion {
          
       function registrarCalificacion(Calificacion $calificacion){
       
-      $id_pregunta   = $calificacion->getId_pregunta();
-      $id_usuario    = $calificacion->getId_usuario();
-      $id_evaluado   = $calificacion->getId_evaluado();
-      $notas         = $calificacion->getCalificacion_nota();
-      $comentario    = $calificacion->getComentario_calificacion();
-      $con           = $calificacion->getCon();
+      $id_pregunta   = $calificacion->getId();
+      $id_usuario    = $calificacion->getUsuario();
+      $id_evaluado   = $calificacion->getEvaluado();
+      $notas         = $calificacion->getNota();
+      $comentario    = $calificacion->getComentario();
+      $con           = Conexion::conectar();
           
       $fecha_agregado=date("Y-m-d H:i:s");
         
-      $sql="INSERT INTO calificacion (id_pregunta,id_usuario,id_evaluado, calificacion_nota, comentario_calificacion ,fecha_agregado) "
+      $sql="INSERT INTO calificacion (id_pregunta,id_usuario,id_evaluado, nota_calificacion, comentario_calificacion ,fecha_calificacion) "
                        . "VALUES('$id_pregunta','$id_usuario','$id_evaluado','$notas',' $comentario','$fecha_agregado') "  ;
       
         $result=mysqli_query($con,$sql);
+      //  print_r($sql);
         return $result;
     }
     
     function registrarComentarioGeneral(Calificacion $calificacion, Encuesta $encuesta){
   
       $id_encuesta   = $encuesta    ->getId(); 
-      $id_usuario    = $calificacion->getId_usuario();
-      $id_evaluado   = $calificacion->getId_evaluado();
-      $comentario    = $calificacion->getComentario_calificacion();
-      $con           = $calificacion->getCon();
+      $id_usuario    = $calificacion->getUsuario();
+      $id_evaluado   = $calificacion->getEvaluado();
+      $comentario    = $calificacion->getComentario();
+      $con           = Conexion::conectar();
       
       $fecha_agregado=date("Y-m-d H:i:s");
         
-      $sql="INSERT INTO comentariofinal (id_encuesta,comentario,id_usuario,id_evaluado,fecha_agregado) "
+      $sql="INSERT INTO comentario_general (id_encuesta,descripcion_comentario_general,id_usuario,id_evaluado,fecha_comentario_general) "
                         . "VALUES ('$id_encuesta','$comentario','$id_usuario','$id_evaluado','$fecha_agregado')";
      
         $result=mysqli_query($con,$sql);
+   //     print_r($sql);
         return $result;
     }
     

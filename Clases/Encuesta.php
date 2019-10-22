@@ -204,8 +204,8 @@ Class Encuesta{
     
     function encuestaCompletada(Encuesta $encuesta){
         
-          $id_asignacion = $encuesta->getId_asignnacion();
-          $con           = $encuesta->getCon();
+          $id_asignacion = $encuesta->getAsignacion();
+          $con           = Conexion::conectar();
         
           $sql= " UPDATE usuarioencuesta SET estado= 2 WHERE id_asignacion='$id_asignacion'";
           $result = mysqli_query($con, $sql);

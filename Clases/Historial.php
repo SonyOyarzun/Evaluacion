@@ -166,21 +166,22 @@ class Historial {
 
       function registrarHistorial(Historial $historial){
       
-      $id_asignacion   = $historial->getId_asignacion();    
-      $id_encuesta     = $historial->getId_encuesta();
-      $id_usuario      = $historial->getId_usuario();
-      $id_evaluado     = $historial->getId_evaluado();
+      $id_asignacion   = $historial->getAsignacion();    
+      $id_encuesta     = $historial->getEncuesta();
+      $id_usuario      = $historial->getUsuario();
+      $id_evaluado     = $historial->getEvaluado();
       $nombre_encuesta = $historial->getNombre_encuesta();
       $tipo_encuesta   = $historial->getTipo_encuesta();
       $con             = Conexion::conectar();    
           
       $fecha_agregado=date("Y-m-d H:i:s");
         
-      $sql="INSERT INTO historial (id_asignacion ,id_encuesta,id_usuario,id_evaluado,nombre_encuesta,tipo_encuesta,fecha_agregado,estado) "
+      $sql="INSERT INTO historial (id_usuario_encuesta ,id_encuesta,id_usuario,id_evaluado,nombre_encuesta,tipo_encuesta,fecha_historial,estado_usuario_encuesta) "
                         . "VALUES ('$id_asignacion','$id_encuesta','$id_usuario','$id_evaluado','$nombre_encuesta','$tipo_encuesta','$fecha_agregado','2')";  
       
-        $result=mysqli_query($con,$sql);
-        return $result;
+      print_r($sql);
+      $result=mysqli_query($con,$sql);
+      return $result;
     }
     function recuperarPromedio(Calificacion $calificacion, Encuesta $encuesta){
     
