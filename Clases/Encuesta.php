@@ -7,6 +7,7 @@ Class Encuesta{
     private $nombre;
     private $tipo;
     private $asignacion;
+    private $estado;
     private $fecha;
     
     //cada cuanto tiempo se realizan evaluaciones en meses
@@ -27,6 +28,10 @@ Class Encuesta{
 
     function getAsignacion() {
         return $this->asignacion;
+    }
+
+    function getEstado() {
+        return $this->estado;
     }
 
     function getFecha() {
@@ -55,6 +60,10 @@ Class Encuesta{
 
     function setAsignacion($asignacion) {
         $this->asignacion = $asignacion;
+    }
+
+    function setEstado($estado) {
+        $this->estado = $estado;
     }
 
     function setFecha($fecha) {

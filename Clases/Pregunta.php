@@ -59,7 +59,7 @@ Class Pregunta{
         $this->condicion = $condicion;
     }
 
-             
+                 
      // metodos
     function recuperarPregunta(Pregunta $pregunta) {
 

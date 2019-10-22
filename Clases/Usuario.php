@@ -104,8 +104,7 @@ Class Usuario{
         $this->condicion = $condicion;
     }
 
-    
-        
+            
     // metodos
     function recuperarUsuario(Usuario $usuario) {
 
