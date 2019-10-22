@@ -225,22 +225,22 @@ Class Usuario{
 
     function verificarUsuarioPorEvaluar(Historial $historial, Departamento $departamento, Encuesta $encuesta){
         
-       $id_asignacion   = $historial    ->getId_asignacion();
+       $id_asignacion   = $historial    ->getAsignacion();
        $id_departamento = $departamento ->getId();
        $tipo            = $encuesta     ->getTipo();
        $con             = Conexion::conectar();
 
         
          $Excep = " SELECT usuario.id_usuario "
-                . " FROM historial,usuarioencuesta,usuario "
+                . " FROM historial,usuario_encuesta,usuario "
                 . " WHERE usuario.id_usuario=historial.id_evaluado "
-                . " AND usuarioencuesta.id_asignacion=historial.id_asignacion "
-                . " AND historial.id_asignacion = '$id_asignacion' ";
+                . " AND usuario_encuesta.id_usuario_encuesta=historial.id_usuario_encuesta "
+                . " AND historial.id_usuario_encuesta = '$id_asignacion' ";
                                              
         
          $sql = " SELECT usuario.id_usuario,usuario.nombre_usuario,usuario.apellido_usuario "
-                . " FROM usuario, departamento, tipo " 
-                . " WHERE usuario.tipo_usuario=tipo.id_tipo "
+                . " FROM usuario, departamento, tipo_usuario " 
+                . " WHERE usuario.tipo_usuario=tipo_usuario.id_tipo_usuario "
                 . " AND usuario.id_usuario not in($Excep) "
                 . " AND usuario.departamento_usuario=departamento.id_departamento ";
                 
@@ -250,7 +250,7 @@ Class Usuario{
          $sql .= " AND usuario.tipo_usuario > 1 ";
          }      
       
-    //    print_r($sql);
+  //      print_r($sql);
         
         $result=mysqli_query($con,$sql);
 

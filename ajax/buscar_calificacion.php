@@ -1,7 +1,6 @@
 <?php
 include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
-/* Connect To Database */
-require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+
 require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
 include '../Clases/Historial.php';
 include '../Clases/Calificacion.php';
@@ -41,26 +40,15 @@ if ($action == 'ajax') {
                         . " AND '$fecha_termino' ";
             }
         }
-
-        include 'pagination.php'; //include pagination file
-        //pagination variables
-        $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
-        $per_page = 18; //how much records you want to show
-        $adjacents = 4; //gap between pages after number of adjacents
-        $offset = ($page - 1) * $per_page;
-
+    
         $historial = new Historial();
         $historial->setId_encuesta($id_encuesta);
         $historial->setCondicion($sWhere);
-        $historial->setOffset($offset);
-        $historial->setPer_page($per_page);
-        $historial->setCon($con);
+     
         
         $result = Historial::recuperarHistorial($historial);
         $numrows = mysqli_num_rows($result);
-        $total_pages = ceil($numrows / $per_page);
-        $reload = 'historial.php';
-        //main query to fetch the data
+        
         $query = $result;
 
 
@@ -124,12 +112,6 @@ if ($action == 'ajax') {
                 <?php
             }
             ?>
-                    <tr>
-                        <td colspan=4><span class="pull-right">
-                    <?php
-                    echo paginate($reload, $page, $total_pages, $adjacents);
-                    ?></span></td>
-                    </tr>
                 </table>
             </div>
                                 <?php

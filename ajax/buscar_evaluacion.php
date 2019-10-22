@@ -39,31 +39,32 @@ if ($action == 'ajax') {
                         <td colspan="1" style="text-align: center">
                             <select id="t_evaluar" name="t_evaluar" class="form-control">
                                 <?php
+                                
                                 $historial = new Historial();
-                                $historial->setId_asignacion($id_asignacion);
+                                $historial->setAsignacion($id_asignacion);
 
                                 $departamento = new Departamento();
                                 $departamento->setId($id_departamento);
 
                                 $encuesta = new Encuesta();
                                 $encuesta->setTipo($tipo);
-                                $encuesta->setCon($con);
 
-                                $query_tipo = Usuario::verificarUsuarioPorEvaluar($historial, $departamento, $encuesta);
-                                while ($rw = mysqli_fetch_array($query_tipo)) {
+                                $query_usuario = Usuario::verificarUsuarioPorEvaluar($historial, $departamento, $encuesta);
+                                while ($rw = mysqli_fetch_array($query_usuario)) {
 
-                                    $id = $rw['id_usuario'];
-                                    $nombre = $rw['nombre_usuario'];
-                                    $apellido = $rw['apellido_usuario'];
+                                    $id         = $rw['id_usuario'];
+                                    $nombre     = $rw['nombre_usuario'];
+                                    $apellido   = $rw['apellido_usuario'];
 
                                     if ($rw['id_usuario'] == $_SESSION['id_usuario']) {
-                                        $nombre = "auto";
-                                        $apellido = "evaluacion";
+                                        $nombre     = " auto";
+                                        $apellido   = " evaluacion";
                                     }
                                     ?>
                                     <option value="<?php echo $id; ?>"><?php echo "[" . $id . "] - " . $nombre . " " . $apellido ?></option>			
                                     <?php
                                 }
+  
                                 ?>
                             </select></td> 
                     </tr>
@@ -105,10 +106,6 @@ if ($action == 'ajax') {
         ?>
                 <tr>
                 <input type="hidden" name="dinamico" id="dinamico" value="<?php echo $id_dinamico ?>">
-                <td colspan=4><span class="pull-right">
-                <?php
-                echo paginate($reload, $page, $total_pages, $adjacents);
-                ?></span></td>
                 </tr>
                 <tfoot>
                     <tr>
