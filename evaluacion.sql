@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2019 a las 08:32:27
+-- Tiempo de generación: 22-10-2019 a las 08:06:41
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -42,14 +42,24 @@ CREATE TABLE `calificacion` (
 --
 
 INSERT INTO `calificacion` (`id_pregunta`, `comentario_calificacion`, `nota_calificacion`, `id_usuario`, `id_evaluado`, `fecha_calificacion`) VALUES
-(14, ' k', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
-(15, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
-(16, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
-(17, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:33'),
-(14, ' 1', 1, '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31'),
-(15, ' 2', 2, '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31'),
-(16, ' 3', 3, '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31'),
-(17, ' 4', 4, '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31');
+(14, ' ', 1, '00.000.000-0', '00.000.000-0', '2019-10-22 06:06:42'),
+(15, ' ', 1, '00.000.000-0', '00.000.000-0', '2019-10-22 06:06:42'),
+(16, ' vf', 1, '00.000.000-0', '00.000.000-0', '2019-10-22 06:06:42'),
+(17, ' ', 1, '00.000.000-0', '00.000.000-0', '2019-10-22 06:06:42'),
+(14, ' ', 1, '00.000.000-0', '14.518.129-1', '2019-10-22 06:25:29'),
+(15, ' ', 2, '00.000.000-0', '14.518.129-1', '2019-10-22 06:25:29'),
+(16, ' ', 3, '00.000.000-0', '14.518.129-1', '2019-10-22 06:25:29'),
+(17, ' ', 4, '00.000.000-0', '14.518.129-1', '2019-10-22 06:25:29'),
+(14, ' ', 1, '00.000.000-0', '18.608.585-k', '2019-10-22 07:02:50'),
+(15, ' ', 1, '00.000.000-0', '18.608.585-k', '2019-10-22 07:02:50'),
+(16, ' ', 2, '00.000.000-0', '18.608.585-k', '2019-10-22 07:02:50'),
+(17, ' ', 2, '00.000.000-0', '18.608.585-k', '2019-10-22 07:02:50'),
+(1, ' ', 2, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:33'),
+(2, ' ', 3, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:33'),
+(3, ' ', 3, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:33'),
+(4, ' ', 4, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:34'),
+(5, ' ', 3, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:34'),
+(6, ' ', 3, '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:34');
 
 -- --------------------------------------------------------
 
@@ -70,8 +80,10 @@ CREATE TABLE `comentario_general` (
 --
 
 INSERT INTO `comentario_general` (`id_encuesta`, `descripcion_comentario_general`, `id_usuario`, `id_evaluado`, `fecha_comentario_general`) VALUES
-(5, 'lll', '00.000.000-0', '00.000.000-0', '2019-10-09 02:06:34'),
-(5, 'jojo', '00.000.000-0', '14.518.129-1', '2019-10-09 02:25:31');
+(5, 'v', '00.000.000-0', '00.000.000-0', '2019-10-22 06:06:42'),
+(5, 'c', '00.000.000-0', '14.518.129-1', '2019-10-22 06:25:29'),
+(5, 'v', '00.000.000-0', '18.608.585-k', '2019-10-22 07:02:50'),
+(3, 'v', '00.000.000-0', '00.000.000-0', '2019-10-22 07:04:34');
 
 -- --------------------------------------------------------
 
@@ -91,7 +103,7 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`id_departamento`, `nombre_departamento`, `descripcion_departamento`, `fecha_departamento`) VALUES
-(1, 'General', 'Sin Area especifica', '0000-00-00 00:00:00'),
+(1, 'General', 'Sin area especifica ', '0000-00-00 00:00:00'),
 (3, 'TI', 'Informatica', '2019-09-05 16:57:05'),
 (4, 'Owl Evaluation', 'Equipo de desarrollo', '2019-09-14 04:45:39');
 
@@ -117,7 +129,8 @@ INSERT INTO `encuesta` (`id_encuesta`, `nombre_encuesta`, `tipo_encuesta`, `fech
 (2, 'DESEMPENO ESPECIFICO DEL CARGO (T.I)', 1, '2019-09-12 03:03:11', 1),
 (3, 'HABILIDADES Y COMPETENCIAS GENERALES (T.I)', 1, '2019-09-12 03:03:35', 1),
 (4, 'HABILIDADES Y COMPETENCIAS GENERALES (DIRECTOR T.I)', 2, '2019-09-12 03:27:53', 1),
-(5, 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, '2019-09-12 03:28:28', 1);
+(5, 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, '2019-09-12 03:28:28', 1),
+(27, 'prueba', 2, '2019-10-21 22:38:00', 2);
 
 -- --------------------------------------------------------
 
@@ -189,7 +202,7 @@ CREATE TABLE `historial` (
   `id_evaluado` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `nombre_encuesta` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `tipo_encuesta` int(11) NOT NULL,
-  `id_asignacion` int(11) NOT NULL,
+  `id_usuario_encuesta` int(11) NOT NULL,
   `fecha_historial` datetime NOT NULL,
   `estado_usuario_encuesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
@@ -198,9 +211,11 @@ CREATE TABLE `historial` (
 -- Volcado de datos para la tabla `historial`
 --
 
-INSERT INTO `historial` (`id_encuesta`, `id_usuario`, `id_evaluado`, `nombre_encuesta`, `tipo_encuesta`, `id_asignacion`, `fecha_historial`, `estado_usuario_encuesta`) VALUES
-(5, '00.000.000-0', '00.000.000-0', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 1, '2019-10-09 02:06:34', 2),
-(5, '00.000.000-0', '14.518.129-1', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 1, '2019-10-09 02:25:31', 2);
+INSERT INTO `historial` (`id_encuesta`, `id_usuario`, `id_evaluado`, `nombre_encuesta`, `tipo_encuesta`, `id_usuario_encuesta`, `fecha_historial`, `estado_usuario_encuesta`) VALUES
+(5, '00.000.000-0', '00.000.000-0', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 3, '2019-10-22 06:06:42', 2),
+(5, '00.000.000-0', '14.518.129-1', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 3, '2019-10-22 06:25:29', 2),
+(5, '00.000.000-0', '18.608.585-k', 'DESEMPENO ESPECIFICO DEL CARGO  (DIRECTOR T.I)', 2, 3, '2019-10-22 07:02:50', 2),
+(3, '00.000.000-0', '00.000.000-0', 'HABILIDADES Y COMPETENCIAS GENERALES (T.I)', 1, 4, '2019-10-22 07:04:34', 2);
 
 -- --------------------------------------------------------
 
@@ -308,6 +323,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `clave_usuario`, `mail_usuario`, `fecha_usuario`, `tipo_usuario`, `genero_usuario`, `departamento_usuario`, `estado_usuario`) VALUES
 ('00.000.000-0', 'Administrador', 'Sistema', '$2y$10$uWtfj/SuQJqs.TSDmJmz8OtWPV5ukdJTJ5aiIILlNwj6Lz3c35z0S', 'admin@admin.com', '2019-09-04 20:00:18', 3, 2, 1, 1),
+('11.111.111-1', 'dfd', 'vvvgfd', '$2y$10$g0YkBlN9awnB04HGfUUrR.8vK41KryKhaYbbjiWeK3V7AM5vKwTpK', 'dfs|#@sdf.com', '2019-10-21 21:43:36', 1, 1, 4, 1),
 ('14.518.129-1', 'Alvaro Guillermo', 'Valenzuela Garrido', '$2y$10$z4lqxhwmiS9ikVmNouomJ.DX/JPDf2zIpfvkKjpYPOMdrZypBNx8a', 'agarrido@ciisa.cl', '2019-09-12 04:32:03', 2, 2, 3, 1),
 ('17.002.792-2', 'Sony Michael', 'Oyarzun Lopez', '$2y$10$wzhrqu3g1z.4OZZfCx9b2evJSVw4nQe1DMJ0hqz5zGEEYJN9YAsSW', 'sony.oyarzun@gmail.com', '2019-09-12 04:33:01', 1, 2, 4, 1),
 ('18.154.878-9', 'Richard Eduardo', 'Perez Contreras', '$2y$10$rJEy2Dx7UQ7PU0CQaM9Bw.l23cKrdXUS2Dg1mQdty9oJLUua.8.gm', 'richard.perez.contreras@ciisa.cl', '2019-09-14 04:49:19', 1, 2, 4, 1),
@@ -332,7 +348,10 @@ CREATE TABLE `usuario_encuesta` (
 --
 
 INSERT INTO `usuario_encuesta` (`id_usuario_encuesta`, `id_usuario`, `id_encuesta`, `fecha_usuario_encuesta`, `estado_usuario_encuesta`) VALUES
-(1, '00.000.000-0', 5, '2019-10-09 02:06:15', 1);
+(1, '18.608.585-k', 5, '2019-10-22 06:06:09', 1),
+(2, '14.518.129-1', 5, '2019-10-22 06:06:15', 1),
+(3, '00.000.000-0', 5, '2019-10-22 06:06:19', 2),
+(4, '00.000.000-0', 3, '2019-10-22 07:04:11', 2);
 
 --
 -- Índices para tablas volcadas
@@ -433,13 +452,13 @@ ALTER TABLE `usuario_encuesta`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `encuesta`
 --
 ALTER TABLE `encuesta`
-  MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -463,7 +482,7 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `id_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_encuesta`
@@ -481,7 +500,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario_encuesta`
 --
 ALTER TABLE `usuario_encuesta`
-  MODIFY `id_usuario_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
