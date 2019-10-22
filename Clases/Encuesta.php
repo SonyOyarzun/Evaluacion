@@ -11,7 +11,7 @@ Class Encuesta{
     private $fecha;
     
     //cada cuanto tiempo se realizan evaluaciones en meses
-    private $reglaevaluacion;   
+    private $regla_evaluacion;   
     private $condicion;
  
     function getId() {
@@ -38,8 +38,8 @@ Class Encuesta{
         return $this->fecha;
     }
 
-    function getReglaevaluacion() {
-        return $this->reglaevaluacion;
+    function getRegla_evaluacion() {
+        return $this->regla_evaluacion;
     }
 
     function getCondicion() {
@@ -70,8 +70,8 @@ Class Encuesta{
         $this->fecha = $fecha;
     }
 
-    function setReglaevaluacion($reglaevaluacion) {
-        $this->reglaevaluacion = $reglaevaluacion;
+    function setRegla_evaluacion($regla_evaluacion) {
+        $this->regla_evaluacion = $regla_evaluacion;
     }
 
     function setCondicion($condicion) {
