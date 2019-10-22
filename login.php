@@ -7,10 +7,6 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     require_once("libraries/password_compatibility_library.php");
 }
 
-// incluye la la coneccion a BD
-require_once("./config/conexion.php");
-$con = Conexion::conectar();
-
 // Abre la  clase login en donde se crearan las variables de session
 require_once("./Autenticacion/Login.php");
 

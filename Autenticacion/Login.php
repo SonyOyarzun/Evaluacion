@@ -1,5 +1,5 @@
 <?php
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/Evaluacion/config/conexion.php');
 /**
  * Class login
  * handles the user's login and logout process
