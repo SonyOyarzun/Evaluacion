@@ -63,6 +63,7 @@ if ($action == 'ajax') {
 
                 <table class="table text-center">
                     <tr  class="success">
+                        <th class="text-center">Tipo Evaluacion</th>
                         <th class="text-center">ID Evaluado</th>
                         <th class="text-center">Evaluado</th>
                         <th class="text-center">Cargo Evaluado</th>
@@ -107,11 +108,14 @@ if ($action == 'ajax') {
                     $nombre_evaluado = $row['nombre_usuario'];
                     $apellido_evaluado = $row['apellido_usuario'];
                 }
+                
+                if($id_evaluado==$id_evaluador){ $_tipo_evaluacion="Auto Evaluacion";}else{$_tipo_evaluacion="Evaluacion Estandar";}
                 ?>
                         <tr>
+                            <td class='bg-warning'><h5><?php echo $_tipo_evaluacion; ?></h4></td>
                             <td class='bg-warning'><h5><?php echo $id_evaluado; ?></h4></td>
                             <td class='bg-warning'><h5><a data-toggle="modal" href="#detalle_evaluacion" data-id="<?php echo $id_evaluado; ?>" data-nombre="<?php echo $nombre_evaluado; ?>" data-apellido="<?php echo $apellido_evaluado; ?>" data-encuesta="<?php echo $_GET['id_encuesta']; ?>"><?php echo $nombre_evaluado . " " . $apellido_evaluado; ?></a></h4></td>
-                            <th class='bg-warning'><h5><?php echo $cargo; ?></h4></th>
+                            <th class='bg-warning'><h5><?php echo $cargo_evaluado; ?></h4></th>
                             <td><h5><?php echo $id_evaluador; ?></h4></td>
                             <td><h5><?php echo $nombre_evaluador . " " . $apellido_evaluador ?></h4></td>
                             <th><h5><?php echo $cargo_evaluador; ?></h4></th>
