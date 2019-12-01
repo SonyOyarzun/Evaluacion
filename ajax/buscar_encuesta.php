@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Aviso!</strong> Encuesta deshabilitada exitosamente.
         </div>
-        <meta http-equiv="refresh" content="2;URL='encuestas.php'" />  
+        <meta http-equiv="refresh" content="2;URL='encuestas'" />  
         <?php
     } else {
         ?>
@@ -76,7 +76,7 @@ if ($action == 'ajax') {
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 thumb text-center ng-scope" ng-repeat="item in records">
                 <a class="thumbnail" href="preguntas.php?id_encuesta=<?php echo $id_encuesta; ?>&tipo_encuesta=<?php echo $id_tipo; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>">
 
-                    <img class="img-responsive" src="img/encuesta.png" alt="<?php echo $comentario_encuesta; ?>">
+                    <img class="img-responsive" src="img/encuesta.png">
 
                 </a>
                 <span class="thumb-name"><strong><?php echo $nombre_encuesta; ?></strong></span>

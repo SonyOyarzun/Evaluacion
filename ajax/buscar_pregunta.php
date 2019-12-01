@@ -55,7 +55,7 @@ if ($action == 'ajax') {
     }
 
     if ($_GET['q'] != "") {
-        $sWhere = "WHERE (";
+        $sWhere = " AND (";
         for ($i = 0; $i < count($aColumns); $i++) {
             $sWhere .= $aColumns[$i] . " LIKE '%" . $q . "%' OR ";
         }

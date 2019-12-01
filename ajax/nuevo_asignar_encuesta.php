@@ -1,6 +1,6 @@
 <?php
 include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
-include '../Mail/email.php';	//enviar mail	
+include ($_SERVER["DOCUMENT_ROOT"].'/Mail/email.php');	
 	/*Inicia validacion del lado del servidor*/
 	if (empty($_POST['seleccion'])) {
            $errors[] = "No ha seleccionado usuarios";

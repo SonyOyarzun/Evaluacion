@@ -45,7 +45,7 @@ if ($action == 'ajax') {
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 thumb text-center ng-scope" ng-repeat="item in records">
                 <a class="thumbnail" href="historial2.php?id_encuesta=<?php echo $id_encuesta; ?>&nombre_encuesta=<?php echo $nombre_encuesta; ?>">
 
-                    <img class="img-responsive" src="img/encuesta.png" alt="<?php echo $comentario_encuesta; ?>">
+                    <img class="img-responsive" src="img/encuesta.png">
 
                 </a>
                 <span class="thumb-name"><strong><?php echo $nombre_encuesta; ?></strong></span>
